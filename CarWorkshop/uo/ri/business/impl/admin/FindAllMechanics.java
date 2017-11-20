@@ -1,4 +1,4 @@
-package uo.ri.business.admin;
+package uo.ri.business.impl.admin;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,10 +11,9 @@ import java.util.Map;
 
 import alb.util.jdbc.Jdbc;
 import uo.ri.common.BusinessException;
+import uo.ri.conf.Conf;
 
 public class FindAllMechanics {
-
-	private static String SQL = "select id, nombre, apellidos from TMecanicos";
 
 	public List<Map<String, Object>> execute() throws BusinessException {
 		List<Map<String, Object>> mechanics = new ArrayList<Map<String, Object>>();
@@ -25,7 +24,7 @@ public class FindAllMechanics {
 		try {
 			c = Jdbc.getConnection();
 
-			pst = c.prepareStatement(SQL);
+			pst = c.prepareStatement(Conf.get("SQL_FIND_ALL_MECHANICS"));
 
 			rs = pst.executeQuery();
 			Map<String, Object> mechanic;

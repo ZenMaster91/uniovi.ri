@@ -1,4 +1,4 @@
-package uo.ri.business.admin;
+package uo.ri.persistence.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,22 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import alb.util.jdbc.Jdbc;
-import alb.util.menu.Action;
-import uo.ri.common.BusinessException;
+import uo.ri.conf.Conf;
+import uo.ri.persistence.MechanicsGateway;
 
-public class AddMechanic implements Action {
-
-	private static String SQL = "insert into TMecanicos(nombre, apellidos) values (?, ?)";
-	private String name, surname;
-
-	public AddMechanic(String name, String surname) {
-		this.name = name;
-		this.surname = surname;
-	}
+public class MechanicGatewayImpl implements MechanicsGateway {
 
 	@Override
-	public void execute() throws BusinessException {
-		// Procesar
+	public void addMechanic(String name, String surname) {
 		Connection c = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
@@ -29,7 +20,7 @@ public class AddMechanic implements Action {
 		try {
 			c = Jdbc.getConnection();
 
-			pst = c.prepareStatement(SQL);
+			pst = c.prepareStatement(Conf.get("SQL_INSERT_MECHANIC"));
 			pst.setString(1, name);
 			pst.setString(2, surname);
 
