@@ -9,6 +9,14 @@ import alb.util.jdbc.Jdbc;
 import uo.ri.conf.Conf;
 import uo.ri.persistence.MechanicsGateway;
 
+/**
+ * 
+ * Implementation for the gateway of the mechanic.
+ *
+ * @author Guillermo Facundo Colunga
+ * @version 201711201808
+ * @since 201711201808
+ */
 public class MechanicGatewayImpl implements MechanicsGateway {
 
 	@Override

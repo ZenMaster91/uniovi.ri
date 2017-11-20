@@ -15,14 +15,33 @@ import alb.util.math.Round;
 import uo.ri.common.BusinessException;
 import uo.ri.conf.Conf;
 
+/**
+ * Creates and invoice for the given failures that have been fixed.
+ *
+ * @author Guillermo Facundo Colunga
+ * @version 201711201754
+ * @since 201711201754
+ */
 public class CreateInvoice {
+	// Database connection.
 	private Connection connection;
+	
+	// List of id of each fault.
 	private List<Long> faults;
 
+	/**
+	 * @param faults to create the invoice for.
+	 */
 	public CreateInvoice(List<Long> faults) {
 		this.faults = faults;
 	}
 
+	/**
+	 * Creates the invoice in the database.
+	 * 
+	 * @return a Map<String, Object> with all the invoice's attributes.
+	 * @throws BusinessException if there's any error during the transaction.
+	 */
 	public Map<String, Object> execute() throws BusinessException {
 		Map<String, Object> invoice = new HashMap<String, Object>();
 
@@ -43,9 +62,7 @@ public class CreateInvoice {
 					importe);
 			vincularAveriasConFactura(idFactura, this.faults);
 			cambiarEstadoAverias(this.faults, "FACTURADA");
-
-			// mostrarFactura(numeroFactura, fechaFactura, totalFactura, iva,
-			// importe);
+			
 			invoice.put("invoiceNumber", numeroFactura);
 			invoice.put("invoiceDate", fechaFactura);
 			invoice.put("invoiceTotal", totalFactura);

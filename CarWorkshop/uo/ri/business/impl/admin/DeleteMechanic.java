@@ -10,11 +10,24 @@ import alb.util.menu.Action;
 import uo.ri.common.BusinessException;
 import uo.ri.conf.Conf;
 
+/**
+ * 
+ * Deletes a mechanic from the database from its own given id.
+ *
+ * @author Guillermo Facundo Colunga
+ * @version 201711201741
+ * @since 201711201741
+ */
 public class DeleteMechanic implements Action {
-	private long idMechanic;
 	
-	public DeleteMechanic(long idMechanic) {
-		this.idMechanic = idMechanic;
+	// Id of the mechanic to delete.
+	private long id;
+
+	/**
+	 * @param id of the mechanic to remove from database.
+	 */
+	public DeleteMechanic(long id) {
+		this.id = id;
 	}
 
 	@Override
@@ -26,16 +39,15 @@ public class DeleteMechanic implements Action {
 
 		try {
 			c = Jdbc.getConnection();
-			
+
 			pst = c.prepareStatement(Conf.get("SQL_DELETE_MECHANIC"));
-			pst.setLong(1, idMechanic);
-			
+			pst.setLong(1, id);
+
 			pst.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
-		}
-		finally {
+		} finally {
 			Jdbc.close(rs, pst, c);
 		}
 	}

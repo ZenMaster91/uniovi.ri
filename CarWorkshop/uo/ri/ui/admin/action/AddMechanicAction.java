@@ -9,10 +9,9 @@ import uo.ri.conf.ServicesFactory;
  * 
  * AddMechanicAction.java
  *
- * @author willy
- * @version
- * @since 2017"4"472017
- * @formatter Oviedo Computing Community
+ * @author Guillermo Facundo Colunga
+ * @version 201711201811
+ * @since 201711201811
  */
 public class AddMechanicAction implements Action {
 

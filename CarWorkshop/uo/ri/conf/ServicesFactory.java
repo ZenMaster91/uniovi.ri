@@ -5,6 +5,14 @@ import uo.ri.business.CashService;
 import uo.ri.business.impl.AdminServiceImpl;
 import uo.ri.business.impl.CashServiceImpl;
 
+/**
+ * 
+ * Factory for the services.
+ *
+ * @author Guillermo Facundo Colunga
+ * @version 201711201807
+ * @since 201711201807
+ */
 public class ServicesFactory {
 
 	/**

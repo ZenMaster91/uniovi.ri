@@ -5,6 +5,14 @@ import uo.ri.conf.ServicesFactory;
 import alb.util.console.Console;
 import alb.util.menu.Action;
 
+/**
+ * 
+ * DeleteMechanicAction.java
+ *
+ * @author Guillermo Facundo Colunga
+ * @version 201711201812
+ * @since 201711201812
+ */
 public class DeleteMechanicAction implements Action {
 
 	@Override

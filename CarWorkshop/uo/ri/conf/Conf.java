@@ -3,10 +3,23 @@ package uo.ri.conf;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * 
+ * Configuration class that will get the strings from the properties file.
+ *
+ * @author Guillermo Facundo Colunga
+ * @version 201711201802
+ * @since 201711201802
+ */
 public class Conf {
+
+	// Unique instance of the class.
 	private static Conf instance;
+
+	// Properties file.
 	private Properties properties;
 
+	// Path to the properties file.
 	private final String CONF_FILE = "configuration.properties";
 
 	private Conf() {
@@ -19,10 +32,23 @@ public class Conf {
 		}
 	}
 
+	/**
+	 * Gets the corresponding string for the given key from the configuration
+	 * file.
+	 * 
+	 * @param key to look for at the configuration file.
+	 * @return the string that matches the key in the configuration file.
+	 */
 	public static String get(String key) {
 		return getInstance().getProperty(key);
 	}
 
+	/**
+	 * Gets the property form the configuration file.
+	 * 
+	 * @param key to look for in the configuration file.
+	 * @return the string that matches the key.
+	 */
 	public String getProperty(String key) {
 		String value = properties.getProperty(key);
 		if (value == null) {
