@@ -1,20 +1,13 @@
 package uo.ri.business.impl.admin;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import alb.util.jdbc.Jdbc;
 import alb.util.menu.Action;
-import uo.ri.common.BusinessException;
-import uo.ri.conf.Conf;
+import uo.ri.conf.PersistenceFactory;
 
 /**
  * Updates the data of a given mechanic. The mechanic is given through its id.
  *
  * @author Guillermo Facundo Colunga
- * @version 201711201749
+ * @version 201711231134
  * @since 201711201749
  */
 public class UpdateMechanic implements Action {
@@ -40,26 +33,8 @@ public class UpdateMechanic implements Action {
 	}
 
 	@Override
-	public void execute() throws BusinessException {
-		Connection c = null;
-		PreparedStatement pst = null;
-		ResultSet rs = null;
-
-		try {
-			c = Jdbc.getConnection();
-
-			pst = c.prepareStatement(Conf.get("SQL_UPDATE_MECHANIC"));
-			pst.setString(1, this.name);
-			pst.setString(2, this.surname);
-			pst.setLong(3, this.id);
-
-			pst.executeUpdate();
-
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} finally {
-			Jdbc.close(rs, pst, c);
-		}
+	public void execute() {
+		PersistenceFactory.getMechanicsGateway().updateMechanic(this.id, this.name, this.surname);
 	}
 
 }

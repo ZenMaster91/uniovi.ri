@@ -1,14 +1,13 @@
 package uo.ri.business.impl.admin;
 
 import alb.util.menu.Action;
-import uo.ri.common.BusinessException;
 import uo.ri.conf.PersistenceFactory;
 
 /**
  * Adds a given mechanic to the database.
  *
  * @author Guillermo Facundo Colunga
- * @version 201711201739
+ * @version 201711231134
  * @since 201711201739
  */
 public class AddMechanic implements Action {
@@ -24,7 +23,7 @@ public class AddMechanic implements Action {
 	}
 
 	@Override
-	public void execute() throws BusinessException {
+	public void execute() {
 		PersistenceFactory.getMechanicsGateway().addMechanic(name, surname);
 	}
 
