@@ -8,7 +8,7 @@ public class NormalizedGoogleDistance implements IExecutable {
 
 	@Override
 	public void execute() {
-	
+	//TODO
 	}
 
 }
