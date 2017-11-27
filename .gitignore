@@ -68,3 +68,5 @@ local.properties
 
 # PDT-specific
 .buildpath
+
+ES_GND/bin/.project
