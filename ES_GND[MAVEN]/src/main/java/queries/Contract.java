@@ -1,4 +1,4 @@
-package elasticSearch;
+package queries;
 
 import java.util.HashMap;
 

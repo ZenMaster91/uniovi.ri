@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package elasticSearch;
+package elasticsearch;
 
 import io.netty.util.ThreadDeathWatcher;
 import io.netty.util.concurrent.GlobalEventExecutor;

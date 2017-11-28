@@ -1,6 +1,7 @@
 package mainTest;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -10,8 +11,8 @@ import org.junit.Test;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import elasticSearch.ElasticSearch;
-import elasticSearch.ElasticSearchConnection;
+import elasticsearch.ElasticSearch;
+import elasticsearch.ElasticSearchConnection;
 import file.FileToLines;
 
 public class AllTests {
@@ -47,23 +48,29 @@ public class AllTests {
 	}
 	
 	@Test
-	public void testElasticConection() {
-		ElasticSearchConnection es = new ElasticSearchConnection("elasticsearch", 9300);
+	public void testElasticConection() throws Exception {
+		ElasticSearch es = new ElasticSearchConnection("elasticsearch", 9300);
 		es.connect();
-		es.indexDocument(new FileToLines( "2008-Feb-02-04.json" ).lines().get(0));
+		System.out.println(es.getClient());
+		es.getClient().close();
 	}
 	
-	public void indexTest() {
-		ElasticSearchConnection es = new ElasticSearchConnection("elasticsearch", 9300);
+	@Test
+	public void indexTest() throws Exception {
+		
+		ElasticSearch es = new ElasticSearchConnection("elasticsearch", 9300);
 		es.connect();
-		System.out.println(es.getConnection().toString());
+		System.out.println(es.getClient());
+	
 		System.out.println("indexing...");
 		
-		FileToLines ftl = new FileToLines( "2008-Feb-02-04.json" );
+		FileToLines ftl = new FileToLines( "2008-Feb-02-04-EN.json" );
 		for (String str : ftl.lines()) {
 			es.indexDocument(str);
 		}
 		System.out.println("done...");
+		
+		es.getClient().close();
 	}
 
 }
