@@ -42,7 +42,7 @@ public class Main {
 
 		// Pregunto si deseo indexar por si ya está indexado.
 		System.out.print("Desea indexar la colección? (SI/NO): ");
-		String ans = "NO";
+		String ans = readWord();
 		if (ans.equals("SI")) {
 
 			System.out.println("indexing...");
@@ -56,74 +56,77 @@ public class Main {
 
 		// Se le pide al usuario la palabra de la cual quiere buscar términos
 		// relacionados.
-		System.out.println(
-				"Please, enter a word to look for related terms in the collection.");
+		while (true) {
+			System.out.println(
+					"Please, enter a word to look for related terms in the collection.");
 
-		// allWords = new ContractImplementation().allWordsAndHits();
+			// allWords = new ContractImplementation().allWordsAndHits();
 
-		System.out.print("Enter a word: ");
-		String searchedWord = readWord();
-		System.out.println("Word entered: " + searchedWord);
-		System.out.println("Searching for related terms...");
-		URL url = new URL("http://localhost:9200/tweets/_search?pretty");
-		HttpURLConnection con = (HttpURLConnection) url.openConnection();
+			System.out.print("Enter a word: ");
+			String searchedWord = readWord();
+			System.out.println("Word entered: " + searchedWord);
+			System.out.println("Searching for related terms...");
+			URL url = new URL("http://localhost:9200/tweets/_search?pretty");
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
-		con.setRequestMethod("POST");
-		con.setRequestProperty("Content-Type", "application/json");
+			con.setRequestMethod("POST");
+			con.setRequestProperty("Content-Type", "application/json");
 
-		con.setDoOutput(true);
-		DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-		wr.writeBytes("{\n" + "  \"query\": {\n" + "    \"match\": {\n"
-				+ "      \"text\": \""+searchedWord+"\"\n" + "    }\n" + "  },\n"
-				+ "  \"aggregations\": {\n" + "    \"my_sample\": {\n"
-				+ "      \"sampler\": {\n" + "        \"shard_size\": 10000\n"
-				+ "      },\n" + "      \"aggregations\": {\n"
-				+ "        \"keywords\": {\n"
-				+ "          \"significant_text\": {\n"
-				+ "            \"field\": \"text\",\n"
-				+ "            \"filter_duplicate_text\": false\n"
-				+ "          }\n" + "        }\n" + "      }\n" + "    }\n"
-				+ "  }\n" + "}");
-		wr.flush();
-		wr.close();
+			con.setDoOutput(true);
+			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+			wr.writeBytes("{\n" + "  \"query\": {\n" + "    \"match\": {\n"
+					+ "      \"text\": \"" + searchedWord + "\"\n" + "    }\n"
+					+ "  },\n" + "  \"aggregations\": {\n"
+					+ "    \"my_sample\": {\n" + "      \"sampler\": {\n"
+					+ "        \"shard_size\": 10000\n" + "      },\n"
+					+ "      \"aggregations\": {\n"
+					+ "        \"keywords\": {\n"
+					+ "          \"significant_text\": {\n"
+					+ "            \"field\": \"text\",\n"
+					+ "            \"filter_duplicate_text\": false\n"
+					+ "          }\n" + "        }\n" + "      }\n" + "    }\n"
+					+ "  }\n" + "}");
+			wr.flush();
+			wr.close();
 
-		BufferedReader iny = new BufferedReader(
-				new InputStreamReader(con.getInputStream()));
-		String output;
-		StringBuffer response = new StringBuffer();
+			BufferedReader iny = new BufferedReader(
+					new InputStreamReader(con.getInputStream()));
+			String output;
+			StringBuffer response = new StringBuffer();
 
-		while ((output = iny.readLine()) != null) {
-			response.append(output);
+			while ((output = iny.readLine()) != null) {
+				response.append(output);
+			}
+			iny.close();
+
+			HashMap<String, Object> jsonAsMap = null;
+			try {
+				jsonAsMap = new ObjectMapper().readValue(response.toString(),
+						new TypeReference<HashMap<String, Object>>() {});
+			} catch (IOException e) {
+				System.err.println("Error while parsing the json document");
+				e.printStackTrace();
+			}
+
+			for (int i = 0; i < ((ArrayList) ((HashMap<String, Object>) ((HashMap<String, Object>) ((HashMap<String, Object>) jsonAsMap
+					.get("aggregations")).get("my_sample")).get("keywords"))
+							.get("buckets")).size(); i++) {
+				System.out.println("related word : "
+						+ ((LinkedHashMap) ((ArrayList) ((HashMap<String, Object>) ((HashMap<String, Object>) ((HashMap<String, Object>) jsonAsMap
+								.get("aggregations")).get("my_sample"))
+										.get("keywords")).get("buckets"))
+												.get(i)).get("key"));
+			}
+
+			System.out.println("All finished...");
 		}
-		iny.close();
-
-		HashMap<String, Object> jsonAsMap = null;
-		try {
-			jsonAsMap = new ObjectMapper().readValue(response.toString(),
-					new TypeReference<HashMap<String, Object>>() {});
-		} catch (IOException e) {
-			System.err.println("Error while parsing the json document");
-			e.printStackTrace();
-		}
-
-		for (int i = 0; i < ((ArrayList) ((HashMap<String, Object>) ((HashMap<String, Object>) ((HashMap<String, Object>) jsonAsMap
-				.get("aggregations")).get("my_sample")).get("keywords"))
-						.get("buckets")).size(); i++) {
-			System.out.println("related word : "
-					+ ((LinkedHashMap) ((ArrayList) ((HashMap<String, Object>) ((HashMap<String, Object>) ((HashMap<String, Object>) jsonAsMap
-							.get("aggregations")).get("my_sample"))
-									.get("keywords")).get("buckets")).get(i))
-											.get("key"));
-		}
-
-		System.out.println("All finished...");
-		ES.disconnect();
+		//ES.disconnect();
 	}
 
 	private static String readWord() {
 		Scanner scanner = new Scanner(System.in);
 		String word = scanner.next();
-		scanner.close();
+		//scanner.close();
 		return word;
 	}
 
