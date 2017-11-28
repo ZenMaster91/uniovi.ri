@@ -74,18 +74,31 @@ public class Main {
 
 			con.setDoOutput(true);
 			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-			wr.writeBytes("{\n" + "  \"query\": {\n" + "    \"match\": {\n"
-					+ "      \"text\": \"" + searchedWord + "\"\n" + "    }\n"
-					+ "  },\n" + "  \"aggregations\": {\n"
-					+ "    \"my_sample\": {\n" + "      \"sampler\": {\n"
-					+ "        \"shard_size\": 10000\n" + "      },\n"
-					+ "      \"aggregations\": {\n"
-					+ "        \"keywords\": {\n"
-					+ "          \"significant_text\": {\n"
-					+ "            \"field\": \"text\",\n"
-					+ "            \"filter_duplicate_text\": false\n"
-					+ "          }\n" + "        }\n" + "      }\n" + "    }\n"
-					+ "  }\n" + "}");
+			wr.writeBytes("{\n" + 
+					"  \"query\": {\n" + 
+					"    \"match\": {\n" + 
+					"      \"text\": {\n" + 
+					"        \"query\": \""+searchedWord+"\",\n" + 
+					"        \"operator\": \"and\"\n" + 
+					"      }\n" + 
+					"    }\n" + 
+					"  },\n" + 
+					"  \"aggs\": {\n" + 
+					"    \"sample\": {\n" + 
+					"      \"sampler\": {\n" + 
+					"        \"shard_size\": 10000\n" + 
+					"      },\n" + 
+					"      \"aggs\": {\n" + 
+					"        \"keywords\": {\n" + 
+					"          \"significant_text\": {\n" + 
+					"            \"field\": \"text\",\n" + 
+					"            \"filter_duplicate_text\": false\n" + 
+					"          }\n" + 
+					"        }\n" + 
+					"      }\n" + 
+					"    }\n" + 
+					"  }\n" + 
+					"}");
 			wr.flush();
 			wr.close();
 
@@ -109,24 +122,24 @@ public class Main {
 			}
 
 			for (int i = 0; i < ((ArrayList) ((HashMap<String, Object>) ((HashMap<String, Object>) ((HashMap<String, Object>) jsonAsMap
-					.get("aggregations")).get("my_sample")).get("keywords"))
+					.get("aggregations")).get("sample")).get("keywords"))
 							.get("buckets")).size(); i++) {
 				System.out.println("related word : "
 						+ ((LinkedHashMap) ((ArrayList) ((HashMap<String, Object>) ((HashMap<String, Object>) ((HashMap<String, Object>) jsonAsMap
-								.get("aggregations")).get("my_sample"))
+								.get("aggregations")).get("sample"))
 										.get("keywords")).get("buckets"))
 												.get(i)).get("key"));
 			}
 
 			System.out.println("All finished...");
 		}
-		//ES.disconnect();
+		// ES.disconnect();
 	}
 
 	private static String readWord() {
 		Scanner scanner = new Scanner(System.in);
-		String word = scanner.next();
-		//scanner.close();
+		String word = scanner.nextLine();
+		// scanner.close();
 		return word;
 	}
 
