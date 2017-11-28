@@ -2,14 +2,18 @@ package elasticsearch;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.text.DecimalFormat;
 import java.util.concurrent.TimeUnit;
 
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.index.IndexResponse;
+import org.elasticsearch.action.support.WriteRequest.RefreshPolicy;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.TransportAddress;
+
+import file.FileToLines;
 
 public class ElasticSearchConnection extends ElasticSearch {
 
@@ -51,7 +55,7 @@ public class ElasticSearchConnection extends ElasticSearch {
 
 		transportClient.addTransportAddress(new TransportAddress(
 				InetAddress.getByName(this.hostmane), super.getPort()));
-		
+
 		this.client = transportClient;
 	}
 
@@ -59,10 +63,29 @@ public class ElasticSearchConnection extends ElasticSearch {
 
 	}
 
-	public void indexDocument(String JSONDocument) {
+	public void indexDocument() {
 		BulkRequestBuilder bulkRequest = this.client.prepareBulk();
-		this.response = new TweetIndex(this, bulkRequest).createIndex(JSONDocument)
-				.getResponse();
+		bulkRequest.setRefreshPolicy(RefreshPolicy.NONE);
+		FileToLines ftl = new FileToLines("2008-Feb-02-04-EN.json");
+
+		int i = 0;
+		double executed = 0;
+		for (String str : ftl.lines()) {
+			if (executed < 10000) {
+				this.response = new TweetIndex(this, bulkRequest)
+						.createIndex(str).getResponse();
+				if (i >= 10000) {
+					bulkRequest.get();
+					bulkRequest = this.client.prepareBulk();
+					bulkRequest.setRefreshPolicy(RefreshPolicy.NONE);
+				}
+
+				i++;
+				executed++;
+				System.out.println("Proceso: " + new DecimalFormat("#0.0000")
+						.format(((double) (executed / 10000.0)) * 100));
+			}
+		}
 		bulkRequest.get();
 	}
 

@@ -1,11 +1,13 @@
 package mainTest;
 
 import java.io.IOException;
-import java.net.UnknownHostException;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -13,12 +15,25 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import elasticsearch.ElasticSearch;
 import elasticsearch.ElasticSearchConnection;
+import elasticsearch.ElasticSearchSearch;
 import file.FileToLines;
 
 public class AllTests {
+	
+	ElasticSearch es = new ElasticSearchConnection("elasticsearch", 9300);
+	
+	@Before
+	public void setUp() throws Exception {
+		es.connect();
+	}
+	
+	@After
+	public void drop() throws Exception {
+		es.getClient().close();
+	}
 
 	@SuppressWarnings({ "unused", "unchecked" })
-	@Test
+	@Test @Ignore
 	public void JSONtoMapTest() {
 		FileToLines ftl = new FileToLines( "2008-Feb-02-04.json" );
 
@@ -49,28 +64,27 @@ public class AllTests {
 	
 	@Test
 	public void testElasticConection() throws Exception {
-		ElasticSearch es = new ElasticSearchConnection("elasticsearch", 9300);
-		es.connect();
 		System.out.println(es.getClient());
-		es.getClient().close();
 	}
 	
 	@Test
 	public void indexTest() throws Exception {
 		
-		ElasticSearch es = new ElasticSearchConnection("elasticsearch", 9300);
-		es.connect();
 		System.out.println(es.getClient());
 	
 		System.out.println("indexing...");
 		
-		FileToLines ftl = new FileToLines( "2008-Feb-02-04-EN.json" );
-		for (String str : ftl.lines()) {
-			es.indexDocument(str);
-		}
+		es.indexDocument();
 		System.out.println("done...");
 		
-		es.getClient().close();
+	}
+	
+	@Test
+	public void searchTest() throws Exception {
+		long a = System.currentTimeMillis();
+		System.out.println("Hits for match (2672): " + new ElasticSearchSearch(es.getClient()).getHitsOf("the").getHits().totalHits);
+		long b = System.currentTimeMillis();
+		System.out.println("Time elapsed : " + (b-a));
 	}
 
 }

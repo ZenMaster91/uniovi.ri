@@ -38,15 +38,7 @@ public class TweetIndex {
 						((HashMap<String, Object>) jsonAsMap.get("_source"))
 								.get("id_str").toString())
 				.setSource(((HashMap<String, Object>) jsonAsMap.get("_source"))));
-		if(this.bulkRequest.numberOfActions() >= 10000) {
-			executeBulk();
-			bulkRequest = this.client.prepareBulk();
-		}
 		return this;
-	}
-	
-	public void executeBulk() {
-		this.bulkRequest.get();
 	}
 
 	public IndexResponse getResponse() {
