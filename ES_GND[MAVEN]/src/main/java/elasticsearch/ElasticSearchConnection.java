@@ -71,7 +71,7 @@ public class ElasticSearchConnection extends ElasticSearch {
 		int i = 0;
 		double executed = 0;
 		for (String str : ftl.lines()) {
-			if (executed < 10000) {
+			if (executed < 30000) {
 				this.response = new TweetIndex(this, bulkRequest)
 						.createIndex(str).getResponse();
 				if (i >= 10000) {
@@ -83,10 +83,11 @@ public class ElasticSearchConnection extends ElasticSearch {
 				i++;
 				executed++;
 				System.out.println("Proceso: " + new DecimalFormat("#0.0000")
-						.format(((double) (executed / 10000.0)) * 100));
+						.format(((double) (executed / 30000.0)) * 100));
 			}
 		}
-		bulkRequest.get();
+		if(bulkRequest.numberOfActions()>0)
+			bulkRequest.get();
 	}
 
 	@Override
