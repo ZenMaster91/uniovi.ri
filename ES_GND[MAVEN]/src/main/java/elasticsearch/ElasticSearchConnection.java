@@ -6,7 +6,6 @@ import java.text.DecimalFormat;
 import java.util.concurrent.TimeUnit;
 
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
-import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.support.WriteRequest.RefreshPolicy;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
@@ -18,7 +17,6 @@ import file.FileToLines;
 public class ElasticSearchConnection extends ElasticSearch {
 
 	private Client client;
-	private IndexResponse response;
 	private String hostmane;
 	private TransportClient transportClient;
 
@@ -72,8 +70,8 @@ public class ElasticSearchConnection extends ElasticSearch {
 		double executed = 0;
 		for (String str : ftl.lines()) {
 			if (executed < 30000) {
-				this.response = new TweetIndex(this, bulkRequest)
-						.createIndex(str).getResponse();
+				new TweetIndex(this, bulkRequest).createIndex(str)
+						.getResponse();
 				if (i >= 10000) {
 					bulkRequest.get();
 					bulkRequest = this.client.prepareBulk();
@@ -86,7 +84,7 @@ public class ElasticSearchConnection extends ElasticSearch {
 						.format(((double) (executed / 30000.0)) * 100));
 			}
 		}
-		if(bulkRequest.numberOfActions()>0)
+		if (bulkRequest.numberOfActions() > 0)
 			bulkRequest.get();
 	}
 

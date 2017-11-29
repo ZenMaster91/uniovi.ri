@@ -24,7 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import elasticsearch.ElasticSearch;
 import elasticsearch.ElasticSearchConnection;
-import elasticsearch.ElasticSearchSearch;
+import elasticsearch.ElasticSearchQuery;
 import file.FileToLines;
 
 public class AllTests {
@@ -70,7 +70,7 @@ public class AllTests {
 	public void searchTest() throws Exception {
 		long a = System.currentTimeMillis();
 		System.out.println("Hits for match (2672): "
-				+ new ElasticSearchSearch(es.getClient()).getHitsOf("the")
+				+ new ElasticSearchQuery(es.getClient()).getHitsOf("the")
 						.getHits().totalHits);
 		long b = System.currentTimeMillis();
 		System.out.println("Time elapsed : " + (b - a));
