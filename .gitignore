@@ -1,5 +1,6 @@
 # Directories #
 /build/
+/build
 /bin/
 target/
 
@@ -9,6 +10,7 @@ target/
 *.class
 
 # Package Files #
+*.jar
 *.war
 *.ear
 *.db
@@ -67,5 +69,4 @@ local.properties
 
 # PDT-specific
 .buildpath
-
-ES_GND/bin/.project
+*/.gradle/
