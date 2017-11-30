@@ -1,9 +1,15 @@
 package core;
 
+import org.apache.commons.lang3.math.NumberUtils;
+
+import AppKit.NSMenu;
+import AppKit.NSMenuItem;
 import UIKit.UIConsole;
 import elasticsearch.ElasticSearch;
 import elasticsearch.ElasticSearchConnection;
-import elasticsearch.ElasticSearchQuery;
+import menuActions.BuscarAction;
+import menuActions.IndexarAction;
+import menuActions.SalirAction;
 
 public class Main {
 
@@ -11,48 +17,26 @@ public class Main {
 			"elasticsearch", 9300);
 
 	public static void main(String[] args) throws Exception {
+		
+		NSMenu menu = new NSMenu();
+		menu.add(new NSMenuItem("Indexar", new IndexarAction(ES)));
+		menu.add(new NSMenuItem("Buscar términos relacionados", new BuscarAction(ES)));
+		menu.add(new NSMenuItem("Salir", new SalirAction(ES)));
 
 		// Mensaje de bienvenida.
 		UIConsole.print("WELCOME TO RELATED TERMS SEARCH ENGINE!!! \n");
 
 		// Realiza la conexión ÚNICA a elasticSearch.
 		ES.connect();
-
-		// Pregunto si deseo indexar por si ya está indexado.
-		UIConsole.print("Desea indexar la colección? (S/N): ");
-		String ans = UIConsole.readLine();
-		if (ans.equals("S")) {
-
-			UIConsole.print("indexing...\n");
-
-			ES.indexDocument();
-
-			UIConsole.print("done...\n");
-
+		
+		while(true) {
+			menu.print();
+			String option;
+			do {
+				System.out.print("Número de opción: ");
+				option = UIConsole.readLine();
+			} while(!NumberUtils.isDigits(option));
+			menu.execute(Integer.parseInt(UIConsole.readLine()));
 		}
-		UIConsole.print("> Indexado saltado\n");
-
-		// Se le pide al usuario la palabra de la cual quiere buscar términos
-		// relacionados.
-		String cont = "S";
-		while (cont.equals("S")) {
-
-			UIConsole.print("Escriba la palabra que quiere buscar: ");
-			String searchedWord = UIConsole.readLine();
-
-			UIConsole.print("Bucando: " + searchedWord + "\n");
-			UIConsole.print("Searching for related terms...\n");
-
-			new ElasticSearchQuery(ES.getClient())
-					.parseResponse(new ElasticSearchQuery(ES.getClient())
-							.getRelatedTerms(searchedWord));
-
-			UIConsole.print("Terminado...\n");
-			UIConsole.print("Quiere continuar buscando palabras? (S/N): ");
-			cont = UIConsole.readLine();
-		}
-		UIConsole.print("GRACIAS POR USAR RELATED TERMS SEARCH ENGINE\n");
-		ES.disconnect();
 	}
-
 }

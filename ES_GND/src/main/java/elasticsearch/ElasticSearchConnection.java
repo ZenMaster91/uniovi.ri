@@ -61,27 +61,28 @@ public class ElasticSearchConnection extends ElasticSearch {
 
 	}
 
-	public void indexDocument() {
+	public void indexDocument(int documentsToIndex, String filename) {
 		BulkRequestBuilder bulkRequest = this.client.prepareBulk();
 		bulkRequest.setRefreshPolicy(RefreshPolicy.NONE);
-		FileToLines ftl = new FileToLines("2008-Feb-02-04-EN.json");
+		FileToLines ftl = new FileToLines(filename);
 
 		int i = 0;
 		double executed = 0;
 		for (String str : ftl.lines()) {
-			if (executed < 30000) {
+			if (executed < documentsToIndex) {
 				new TweetIndex(this, bulkRequest).createIndex(str)
 						.getResponse();
 				if (i >= 10000) {
 					bulkRequest.get();
 					bulkRequest = this.client.prepareBulk();
 					bulkRequest.setRefreshPolicy(RefreshPolicy.NONE);
+					i = 0;
 				}
 
 				i++;
 				executed++;
 				System.out.println("Proceso: " + new DecimalFormat("#0.0000")
-						.format(((double) (executed / 30000.0)) * 100));
+						.format(((double) (executed / (double)documentsToIndex)) * 100) + "%");
 			}
 		}
 		if (bulkRequest.numberOfActions() > 0)

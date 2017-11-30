@@ -10,6 +10,6 @@ public interface IElasticSearch {
 	
 	public Client getClient();
 	
-	public void indexDocument();
+	public void indexDocument(int documentsToIndex, String filename);
 
 }

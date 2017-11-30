@@ -1,6 +1,7 @@
 # Directories #
 /build/
 /build
+ES_GND/bin/
 /bin/
 target/
 

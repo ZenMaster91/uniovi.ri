@@ -5,15 +5,11 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.Map.Entry;
 
-import org.elasticsearch.client.Client;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -41,7 +37,7 @@ public class AllTests {
 		es.getClient().close();
 	}
 
-	@SuppressWarnings({ "unused", "unchecked" })
+	@SuppressWarnings({ "unused" })
 	@Test
 	@Ignore
 	public void JSONtoMapTest() {
@@ -61,7 +57,7 @@ public class AllTests {
 
 		System.out.println("indexing...");
 
-		es.indexDocument();
+		//es.indexDocument();
 		System.out.println("done...");
 
 	}
@@ -76,6 +72,7 @@ public class AllTests {
 		System.out.println("Time elapsed : " + (b - a));
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Test
 	public void curlTest() throws Exception {
 		URL url = new URL("http://localhost:9200/tweets/_search?pretty");
