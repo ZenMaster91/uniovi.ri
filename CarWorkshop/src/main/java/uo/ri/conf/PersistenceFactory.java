@@ -1,6 +1,8 @@
 package uo.ri.conf;
 
+import uo.ri.persistence.CashGateway;
 import uo.ri.persistence.MechanicsGateway;
+import uo.ri.persistence.impl.CashGatewayImpl;
 import uo.ri.persistence.impl.MechanicGatewayImpl;
 
 /**
@@ -18,5 +20,9 @@ public class PersistenceFactory {
 	 */
 	public static MechanicsGateway getMechanicsGateway() {
 		return new MechanicGatewayImpl();
+	}
+	
+	public static CashGateway getCashGateway() {
+		return new CashGatewayImpl();
 	}
 }
