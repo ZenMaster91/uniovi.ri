@@ -1,8 +1,10 @@
 package uo.ri.conf;
 
-import uo.ri.persistence.CashGateway;
+import uo.ri.persistence.FaultGateway;
+import uo.ri.persistence.InvoiceGateway;
 import uo.ri.persistence.MechanicsGateway;
-import uo.ri.persistence.impl.CashGatewayImpl;
+import uo.ri.persistence.impl.FaultGatewayImpl;
+import uo.ri.persistence.impl.InvoiceGatewayImpl;
 import uo.ri.persistence.impl.MechanicGatewayImpl;
 
 /**
@@ -22,7 +24,11 @@ public class PersistenceFactory {
 		return new MechanicGatewayImpl();
 	}
 	
-	public static CashGateway getCashGateway() {
-		return new CashGatewayImpl();
+	public static InvoiceGateway getInvoiceGateway() {
+		return new InvoiceGatewayImpl();
+	}
+	
+	public static FaultGateway getFaultGateway() {
+		return new FaultGatewayImpl();
 	}
 }

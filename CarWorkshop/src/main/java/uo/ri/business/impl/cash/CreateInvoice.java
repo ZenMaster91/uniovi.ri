@@ -1,8 +1,6 @@
 package uo.ri.business.impl.cash;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
@@ -13,7 +11,7 @@ import alb.util.date.DateUtil;
 import alb.util.jdbc.Jdbc;
 import alb.util.math.Round;
 import uo.ri.common.BusinessException;
-import uo.ri.conf.Conf;
+import uo.ri.conf.PersistenceFactory;
 
 /**
  * Creates and invoice for the given failures that have been fixed.
@@ -25,7 +23,7 @@ import uo.ri.conf.Conf;
 public class CreateInvoice {
 	// Database connection.
 	private Connection connection;
-	
+
 	// List of id of each fault.
 	private List<Long> faults;
 
@@ -62,7 +60,7 @@ public class CreateInvoice {
 					importe);
 			vincularAveriasConFactura(idFactura, this.faults);
 			cambiarEstadoAverias(this.faults, "FACTURADA");
-			
+
 			invoice.put("invoiceNumber", numeroFactura);
 			invoice.put("invoiceDate", fechaFactura);
 			invoice.put("invoiceTotal", totalFactura);
@@ -91,56 +89,16 @@ public class CreateInvoice {
 		return invoice;
 	}
 
-	@SuppressWarnings("resource")
 	private void verificarAveriasTerminadas(List<Long> idsAveria)
-			throws SQLException, BusinessException {
-		PreparedStatement pst = null;
-		ResultSet rs = null;
-
-		try {
-			pst = connection
-					.prepareStatement(Conf.get("SQL_VERIFICAR_ESTADO_AVERIA"));
-
-			for (Long idAveria : idsAveria) {
-				pst.setLong(1, idAveria);
-
-				rs = pst.executeQuery();
-				if (rs.next() == false) {
-					throw new BusinessException(
-							"No existe la averia " + idAveria);
-				}
-
-				String status = rs.getString(1);
-				if (!"TERMINADA".equalsIgnoreCase(status)) {
-					throw new BusinessException(
-							"No está terminada la avería " + idAveria);
-				}
-
-				rs.close();
-			}
-		} finally {
-			Jdbc.close(rs, pst);
-		}
+			throws BusinessException {
+		PersistenceFactory.getFaultGateway()
+				.verificarAveriasTerminadas(idsAveria);
 
 	}
 
-	private Long generarNuevoNumeroFactura() throws SQLException {
-		PreparedStatement pst = null;
-		ResultSet rs = null;
-
-		try {
-			pst = connection
-					.prepareStatement(Conf.get("SQL_ULTIMO_NUMERO_FACTURA"));
-			rs = pst.executeQuery();
-
-			if (rs.next()) {
-				return rs.getLong(1) + 1; // +1, el siguiente
-			} else { // todavía no hay ninguna
-				return 1L;
-			}
-		} finally {
-			Jdbc.close(rs, pst);
-		}
+	private Long generarNuevoNumeroFactura() throws BusinessException {
+		return PersistenceFactory.getInvoiceGateway()
+				.generarNuevoNumeroFactura();
 	}
 
 	protected double calcularImportesAverias(List<Long> idsAveria)
@@ -160,65 +118,21 @@ public class CreateInvoice {
 	}
 
 	private double consultaImporteManoObra(Long idAveria)
-			throws BusinessException, SQLException {
-		PreparedStatement pst = null;
-		ResultSet rs = null;
-
-		try {
-			pst = connection
-					.prepareStatement(Conf.get("SQL_IMPORTE_MANO_OBRA"));
-			pst.setLong(1, idAveria);
-
-			rs = pst.executeQuery();
-			if (rs.next() == false) {
-				throw new BusinessException(
-						"La averia no existe o no se puede facturar");
-			}
-
-			return rs.getDouble(1);
-
-		} catch (BusinessException e) {
-			throw e;
-		} finally {
-			Jdbc.close(rs, pst);
-		}
-
+			throws BusinessException {
+		return PersistenceFactory.getFaultGateway()
+				.consultaImporteManoObra(idAveria);
 	}
 
-	private double consultaImporteRepuestos(Long idAveria) throws SQLException {
-		PreparedStatement pst = null;
-		ResultSet rs = null;
-
-		try {
-			pst = connection
-					.prepareStatement(Conf.get("SQL_IMPORTE_REPUESTOS"));
-			pst.setLong(1, idAveria);
-
-			rs = pst.executeQuery();
-			if (rs.next() == false) {
-				return 0.0; // La averia puede no tener repuestos
-			}
-
-			return rs.getDouble(1);
-
-		} finally {
-			Jdbc.close(rs, pst);
-		}
+	private double consultaImporteRepuestos(Long idAveria)
+			throws BusinessException {
+		return PersistenceFactory.getFaultGateway()
+				.consultaImporteRepuestos(idAveria);
 	}
 
 	private void actualizarImporteAveria(Long idAveria, double totalAveria)
-			throws SQLException {
-		PreparedStatement pst = null;
-
-		try {
-			pst = connection
-					.prepareStatement(Conf.get("SQL_UPDATE_IMPORTE_AVERIA"));
-			pst.setDouble(1, totalAveria);
-			pst.setLong(2, idAveria);
-			pst.executeUpdate();
-		} finally {
-			Jdbc.close(pst);
-		}
+			throws BusinessException {
+		PersistenceFactory.getFaultGateway().actualizarImporteAveria(idAveria,
+				totalAveria);
 	}
 
 	private double porcentajeIva(double totalFactura, Date fechaFactura) {
@@ -227,81 +141,21 @@ public class CreateInvoice {
 	}
 
 	private long crearFactura(long numeroFactura, Date fechaFactura, double iva,
-			double totalConIva) throws SQLException {
+			double totalConIva) throws BusinessException {
 
-		PreparedStatement pst = null;
-
-		try {
-			pst = connection.prepareStatement(Conf.get("SQL_INSERTAR_FACTURA"));
-			pst.setLong(1, numeroFactura);
-			pst.setDate(2, new java.sql.Date(fechaFactura.getTime()));
-			pst.setDouble(3, iva);
-			pst.setDouble(4, totalConIva);
-			pst.setString(5, "SIN_ABONAR");
-
-			pst.executeUpdate();
-
-			return getGeneratedKey(numeroFactura); // Id de la nueva factura
-													// generada
-
-		} finally {
-			Jdbc.close(pst);
-		}
-	}
-
-	private long getGeneratedKey(long numeroFactura) throws SQLException {
-		PreparedStatement pst = null;
-		ResultSet rs = null;
-
-		try {
-			pst = connection
-					.prepareStatement(Conf.get("SQL_RECUPERAR_CLAVE_GENERADA"));
-			pst.setLong(1, numeroFactura);
-			rs = pst.executeQuery();
-			rs.next();
-
-			return rs.getLong(1);
-
-		} finally {
-			Jdbc.close(rs, pst);
-		}
+		return PersistenceFactory.getInvoiceGateway()
+				.crearFactura(numeroFactura, fechaFactura, iva, totalConIva);
 	}
 
 	private void vincularAveriasConFactura(long idFactura, List<Long> idsAveria)
-			throws SQLException {
-
-		PreparedStatement pst = null;
-		try {
-			pst = connection
-					.prepareStatement(Conf.get("SQL_VINCULAR_AVERIA_FACTURA"));
-
-			for (Long idAveria : idsAveria) {
-				pst.setLong(1, idFactura);
-				pst.setLong(2, idAveria);
-
-				pst.executeUpdate();
-			}
-		} finally {
-			Jdbc.close(pst);
-		}
+			throws BusinessException {
+		PersistenceFactory.getInvoiceGateway()
+				.vincularAveriasConFactura(idFactura, idsAveria);
 	}
 
 	private void cambiarEstadoAverias(List<Long> idsAveria, String status)
-			throws SQLException {
-
-		PreparedStatement pst = null;
-		try {
-			pst = connection
-					.prepareStatement(Conf.get("SQL_ACTUALIZAR_ESTADO_AVERIA"));
-
-			for (Long idAveria : idsAveria) {
-				pst.setString(1, status);
-				pst.setLong(2, idAveria);
-
-				pst.executeUpdate();
-			}
-		} finally {
-			Jdbc.close(pst);
-		}
+			throws BusinessException {
+		PersistenceFactory.getFaultGateway().cambiarEstadoAverias(idsAveria,
+				status);
 	}
 }
