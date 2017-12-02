@@ -9,6 +9,13 @@
 
   <name>ES_GND_local_maven</name>
   <url>http://maven.apache.org</url>
+  
+  <repositories>
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
+	</repositories>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -57,6 +64,11 @@
     		<groupId>com.sun.jna</groupId>
     		<artifactId>jna</artifactId>
     		<version>3.0.9</version>
+	</dependency>
+	<dependency>
+	    <groupId>com.github.ZenMaster91</groupId>
+	    <artifactId>willyOS-java</artifactId>
+	    <version>1.1</version>
 	</dependency>
   </dependencies>
 </project>

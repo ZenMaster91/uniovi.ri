@@ -1,146 +1,58 @@
 package core;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.Map.Entry;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
+import UIKit.UIConsole;
 import elasticsearch.ElasticSearch;
 import elasticsearch.ElasticSearchConnection;
-import file.FileToLines;
+import elasticsearch.ElasticSearchQuery;
 
-/**
- * Hello world!
- *
- */
 public class Main {
 
-	public static HashMap<String, Long> allWords;
 	private static ElasticSearch ES = new ElasticSearchConnection(
 			"elasticsearch", 9300);
 
 	public static void main(String[] args) throws Exception {
 
 		// Mensaje de bienvenida.
-		System.out.println("WELCOME TO RELATED TERMS SEARCH ENGINE!!!");
+		UIConsole.print("WELCOME TO RELATED TERMS SEARCH ENGINE!!! \n");
 
 		// Realiza la conexión ÚNICA a elasticSearch.
 		ES.connect();
 
 		// Pregunto si deseo indexar por si ya está indexado.
-		System.out.print("Desea indexar la colección? (SI/NO): ");
-		String ans = readWord();
-		if (ans.equals("SI")) {
+		UIConsole.print("Desea indexar la colección? (S/N): ");
+		String ans = UIConsole.readLine();
+		if (ans.equals("S")) {
 
-			System.out.println("indexing...");
+			UIConsole.print("indexing...\n");
 
 			ES.indexDocument();
 
-			System.out.println("done...");
+			UIConsole.print("done...\n");
 
 		}
-		System.out.println("> Indexado saltado");
+		UIConsole.print("> Indexado saltado\n");
 
 		// Se le pide al usuario la palabra de la cual quiere buscar términos
 		// relacionados.
-		while (true) {
-			System.out.println(
-					"Please, enter a word to look for related terms in the collection.");
+		String cont = "S";
+		while (cont.equals("S")) {
 
-			// allWords = new ContractImplementation().allWordsAndHits();
+			UIConsole.print("Escriba la palabra que quiere buscar: ");
+			String searchedWord = UIConsole.readLine();
 
-			System.out.print("Enter a word: ");
-			String searchedWord = readWord();
-			System.out.println("Word entered: " + searchedWord);
-			System.out.println("Searching for related terms...");
-			URL url = new URL("http://localhost:9200/tweets/_search?pretty");
-			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+			UIConsole.print("Bucando: " + searchedWord + "\n");
+			UIConsole.print("Searching for related terms...\n");
 
-			con.setRequestMethod("POST");
-			con.setRequestProperty("Content-Type", "application/json");
+			new ElasticSearchQuery(ES.getClient())
+					.parseResponse(new ElasticSearchQuery(ES.getClient())
+							.getRelatedTerms(searchedWord));
 
-			con.setDoOutput(true);
-			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-			wr.writeBytes("{\n" + 
-					"  \"query\": {\n" + 
-					"    \"match\": {\n" + 
-					"      \"text\": {\n" + 
-					"        \"query\": \""+searchedWord+"\",\n" + 
-					"        \"operator\": \"and\"\n" + 
-					"      }\n" + 
-					"    }\n" + 
-					"  },\n" + 
-					"  \"aggs\": {\n" + 
-					"    \"sample\": {\n" + 
-					"      \"sampler\": {\n" + 
-					"        \"shard_size\": 10000\n" + 
-					"      },\n" + 
-					"      \"aggs\": {\n" + 
-					"        \"keywords\": {\n" + 
-					"          \"significant_text\": {\n" + 
-					"            \"field\": \"text\",\n" + 
-					"            \"filter_duplicate_text\": false\n" + 
-					"          }\n" + 
-					"        }\n" + 
-					"      }\n" + 
-					"    }\n" + 
-					"  }\n" + 
-					"}");
-			wr.flush();
-			wr.close();
-
-			BufferedReader iny = new BufferedReader(
-					new InputStreamReader(con.getInputStream()));
-			String output;
-			StringBuffer response = new StringBuffer();
-
-			while ((output = iny.readLine()) != null) {
-				response.append(output);
-			}
-			iny.close();
-
-			HashMap<String, Object> jsonAsMap = null;
-			try {
-				jsonAsMap = new ObjectMapper().readValue(response.toString(),
-						new TypeReference<HashMap<String, Object>>() {});
-			} catch (IOException e) {
-				System.err.println("Error while parsing the json document");
-				e.printStackTrace();
-			}
-
-			for (int i = 0; i < ((ArrayList) ((HashMap<String, Object>) ((HashMap<String, Object>) ((HashMap<String, Object>) jsonAsMap
-					.get("aggregations")).get("sample")).get("keywords"))
-							.get("buckets")).size(); i++) {
-				System.out.println("related word : "
-						+ ((LinkedHashMap) ((ArrayList) ((HashMap<String, Object>) ((HashMap<String, Object>) ((HashMap<String, Object>) jsonAsMap
-								.get("aggregations")).get("sample"))
-										.get("keywords")).get("buckets"))
-												.get(i)).get("key"));
-			}
-
-			System.out.println("All finished...");
+			UIConsole.print("Terminado...\n");
+			UIConsole.print("Quiere continuar buscando palabras? (S/N): ");
+			cont = UIConsole.readLine();
 		}
-		// ES.disconnect();
-	}
-
-	private static String readWord() {
-		Scanner scanner = new Scanner(System.in);
-		String word = scanner.nextLine();
-		// scanner.close();
-		return word;
+		UIConsole.print("GRACIAS POR USAR RELATED TERMS SEARCH ENGINE\n");
+		ES.disconnect();
 	}
 
 }
