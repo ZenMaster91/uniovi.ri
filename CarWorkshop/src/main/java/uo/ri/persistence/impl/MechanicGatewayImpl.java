@@ -75,7 +75,7 @@ public class MechanicGatewayImpl implements MechanicsGateway {
 
 		try {
 			c = Jdbc.getConnection();
-
+			System.out.println(Conf.get("SQL_FIND_ALL_MECHANICS"));
 			pst = c.prepareStatement(Conf.get("SQL_FIND_ALL_MECHANICS"));
 
 			rs = pst.executeQuery();

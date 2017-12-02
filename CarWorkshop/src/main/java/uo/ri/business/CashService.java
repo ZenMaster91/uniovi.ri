@@ -1,5 +1,6 @@
 package uo.ri.business;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -15,5 +16,11 @@ public interface CashService {
 	 * @throws BusinessException
 	 */
 	public Map<String, Object> createInvoice(List<Long> ids) throws BusinessException;
+	
+	public void addMetalic(int idCliente);
+	
+	public void addCreditCard(int idCliente, int creditCardNumber, Date expirationDate);
+	
+	public void addBono(int idCliente, String descripcion, double disponible);
 
 }
