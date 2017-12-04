@@ -15,39 +15,80 @@ public class TipoVehiculo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
 	private String nombre;
 	private double precioHora;
 
 	@OneToMany(mappedBy = "tipoVehiculo")
 	private Set<Vehiculo> vehiculos = new HashSet<>();
 
+	/**
+	 * Allocates a vehicle type object and initializes it.
+	 */
 	TipoVehiculo() {}
 
+	/**
+	 * Allocates a vehicle type object and initializes it.
+	 * 
+	 * @param nombre of the vehicle type.
+	 */
 	public TipoVehiculo( String nombre ) {
 		super();
 		this.nombre = nombre;
 	}
 
+	/**
+	 * Allocates a vehicle type object and initializes it.
+	 * 
+	 * @param nombre of the vehicle type.
+	 * @param precioHora is the price for hour of work.
+	 */
 	public TipoVehiculo( String nombre, double precioHora ) {
 		this( nombre );
 		this.precioHora = precioHora;
 	}
 
+	/**
+	 * @return the unique id of the object. JPA.
+	 */
 	public long getId() {
 		return this.id;
 	}
 
+	/**
+	 * @return the name of the vehicle type.
+	 */
+	public String getNombre() {
+		return nombre;
+	}
+
+	/**
+	 * @return the price for hour of work.
+	 */
 	public double getPrecioHora() {
 		return precioHora;
 	}
 
+	/**
+	 * Changes the price for hour of work.
+	 * 
+	 * @param precioHora to set.
+	 */
 	public void setPrecioHora( double precioHora ) {
 		this.precioHora = precioHora;
 	}
 
-	public String getNombre() {
-		return nombre;
+	/**
+	 * @return a copy of the original copy of the set of vehicles of this type.
+	 */
+	public Set<Vehiculo> getVehiculos() {
+		return new HashSet<>( vehiculos );
+	}
+
+	/**
+	 * @return the original copy of the set of vehicles of this type.
+	 */
+	Set<Vehiculo> _getVehiculos() {
+		return vehiculos;
 	}
 
 	@Override
@@ -73,14 +114,6 @@ public class TipoVehiculo {
 		} else if (!nombre.equals( other.nombre ))
 			return false;
 		return true;
-	}
-
-	Set<Vehiculo> _getVehiculos() {
-		return vehiculos;
-	}
-
-	public Set<Vehiculo> getVehiculos() {
-		return new HashSet<>( vehiculos );
 	}
 
 }

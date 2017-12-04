@@ -27,24 +27,57 @@ public abstract class MedioPago {
 	@OneToMany(mappedBy = "medioPago")
 	private Set<Cargo> cargos = new HashSet<>();
 
+	/**
+	 * @return the unique id of the object. JPA.
+	 */
 	public long getId() {
 		return id;
 	}
 
+	/**
+	 * @return the client that if the owner of the payment type.
+	 */
 	public Cliente getCliente() {
 		return cliente;
 	}
 
-	void _setCliente( Cliente cliente ) {
-		this.cliente = cliente;
-	}
-
+	/**
+	 * @return the accumulated value payed in the payment type.
+	 */
 	public double getAcumulado() {
 		return acumulado;
 	}
 
+	/**
+	 * Changes the accumulated value of the payment type.
+	 * 
+	 * @param acumulado is the new accumulated.
+	 */
 	public void setAcumulado( double acumulado ) {
 		this.acumulado = acumulado;
+	}
+
+	/**
+	 * @return a copy of the set of charges done to the payment type.
+	 */
+	public Set<Cargo> getCargos() {
+		return new HashSet<>( cargos );
+	}
+
+	/**
+	 * Changes the client that is the owner of the payment type.
+	 * 
+	 * @param cliente that will be the new owner.
+	 */
+	void _setCliente( Cliente cliente ) {
+		this.cliente = cliente;
+	}
+
+	/**
+	 * @return the original set of charges done on the payment type.
+	 */
+	Set<Cargo> _getCargos() {
+		return cargos;
 	}
 
 	@Override
@@ -70,14 +103,6 @@ public abstract class MedioPago {
 		} else if (!cliente.equals( other.cliente ))
 			return false;
 		return true;
-	}
-
-	Set<Cargo> _getCargos() {
-		return cargos;
-	}
-
-	public Set<Cargo> getCargos() {
-		return new HashSet<>( cargos );
 	}
 
 }

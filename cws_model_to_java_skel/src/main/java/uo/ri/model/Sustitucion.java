@@ -18,43 +18,82 @@ public class Sustitucion {
 	private Intervencion intervencion;
 	private int cantidad;
 
+	/**
+	 * Allocates a substitution object and initializes it.
+	 */
 	Sustitucion() {}
 
+	/**
+	 * Allocates a substitution object and initializes it.
+	 * 
+	 * @param repuesto used in the substitution.
+	 * @param intervencion that changed the replacement.
+	 */
 	public Sustitucion( Repuesto repuesto, Intervencion intervencion ) {
 		super();
 		Association.Sustituir.link( repuesto, this, intervencion );
 	}
 
+	/**
+	 * @return the unique id of the object. JPA.
+	 */
 	public long getId() {
 		return this.id;
 	}
 
+	/**
+	 * @return the amount of the substitution.
+	 */
 	public double getImporte() {
 		return this.cantidad * this.repuesto.getPrecio();
 	}
 
+	/**
+	 * @return the replacement used.
+	 */
 	public Repuesto getRepuesto() {
 		return repuesto;
 	}
 
-	void _setRepuesto( Repuesto repuesto ) {
-		this.repuesto = repuesto;
-	}
-
+	/**
+	 * @return the intervention attached to the substitution.
+	 */
 	public Intervencion getIntervencion() {
 		return intervencion;
 	}
 
-	void _setIntervencion( Intervencion intervencion ) {
-		this.intervencion = intervencion;
-	}
-
+	/**
+	 * @return the amount of the substitution.
+	 */
 	public int getCantidad() {
 		return cantidad;
 	}
 
+	/**
+	 * Changes the quantity of the substitution.
+	 * 
+	 * @param cantidad to set.
+	 */
 	public void setCantidad( int cantidad ) {
 		this.cantidad = cantidad;
+	}
+
+	/**
+	 * Changes the replacement of the substitution.
+	 * 
+	 * @param repuesto to set.
+	 */
+	void _setRepuesto( Repuesto repuesto ) {
+		this.repuesto = repuesto;
+	}
+
+	/**
+	 * Changes the intervention of the substitution.
+	 * 
+	 * @param intervencion to set.
+	 */
+	void _setIntervencion( Intervencion intervencion ) {
+		this.intervencion = intervencion;
 	}
 
 	@Override

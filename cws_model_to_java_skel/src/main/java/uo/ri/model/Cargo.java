@@ -21,12 +21,22 @@ public class Cargo {
 	private MedioPago medioPago;
 	private double importe = 0.0;
 
+	/**
+	 * Allocates a cargo object and initializes it so that it represents a
+	 * payment.
+	 */
 	Cargo() {}
 
+	/**
+	 * Allocates a cargo object and initializes it so that it represents a
+	 * payment from an invoice with a payment type and an amount of money.
+	 * 
+	 * @param factura represents the invoice.
+	 * @param medioPago that has been used in the payment.
+	 * @param importe is the amount of money payed.
+	 * @throws BusinessException if the payment cannot be done.
+	 */
 	public Cargo( Factura factura, MedioPago medioPago, double importe ) throws BusinessException {
-		// incrementar el importe en el acumulado del medio de pago
-		// guardar el importe
-		// enlazar (link) factura, este cargo y medioDePago
 		super();
 		medioPago.acumulado += importe;
 		this.importe = importe;
@@ -34,40 +44,54 @@ public class Cargo {
 
 	}
 
+	/**
+	 * @return the unique id of the object. JPA.
+	 */
 	public long getId() {
 		return this.id;
 	}
 
 	/**
-	 * Anula (retrocede) este cargo de la factura y el medio de pago Solo se
-	 * puede hacer si la factura no está abonada Decrementar el acumulado del
-	 * medio de pago Desenlazar el cargo de la factura y el medio de pago
-	 * 
-	 * @throws BusinessException
+	 * @return the current invoice.
 	 */
-	public void rewind() throws BusinessException {
-		// verificar que la factura no esta ABONADA
-		if (this.factura.getStatus().equals( FacturaStatus.SIN_ABONAR )) {
-			// decrementar acumulado en medio de pago
-			medioPago.acumulado -= this.importe;
-			// desenlazar factura, cargo y edio de pago
-			Association.Cargar.unlink( this );
-		}
-
-	}
-
 	public Factura getFactura() {
 		return factura;
 	}
 
-	void _setFactura( Factura factura ) {
-		this.factura = factura;
-	}
-
+	/**
+	 * @return the payment type used.
+	 */
 	public MedioPago getMedioPago() {
 		return medioPago;
 	}
 
+	/**
+	 * Rolls-back the payment from the invoice and from the payment type.
+	 * 
+	 * @throws BusinessException if the action cannot be done.
+	 */
+	public void rewind() throws BusinessException {
+		if (this.factura.getStatus().equals( FacturaStatus.SIN_ABONAR )) {
+			medioPago.acumulado -= this.importe;
+			Association.Cargar.unlink( this );
+		}
+	
+	}
+
+	/**
+	 * Changes the current invoice.
+	 * 
+	 * @param factura to set.
+	 */
+	void _setFactura( Factura factura ) {
+		this.factura = factura;
+	}
+
+	/**
+	 * Changes the payment type.
+	 * 
+	 * @param medioPago to set.
+	 */
 	void _setMedioPago( MedioPago medioPago ) {
 		this.medioPago = medioPago;
 	}

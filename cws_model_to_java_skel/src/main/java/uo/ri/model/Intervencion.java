@@ -15,12 +15,14 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(uniqueConstraints = { @UniqueConstraint(columnNames = "AVERIA_ID, MECANICO_ID") })
 public class Intervencion {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@ManyToOne
 	private Averia averia;
+
 	@ManyToOne
 	private Mecanico mecanico;
 	private int minutos;
@@ -28,13 +30,32 @@ public class Intervencion {
 	@OneToMany(mappedBy = "intervencion")
 	private Set<Sustitucion> sustituciones = new HashSet<>();
 
+	/**
+	 * Allocates a intervention object and initializes it.
+	 */
 	Intervencion() {}
 
+	/**
+	 * Allocates a intervention object and initializes it.
+	 * 
+	 * @param mecanico that performs the action.
+	 * @param averia where the action is performed.
+	 */
 	public Intervencion( Mecanico mecanico, Averia averia ) {
 		super();
 		Association.Intervenir.link( averia, this, mecanico );
 	}
 
+	/**
+	 * @return the unique id of the object. JPA.
+	 */
+	public long getId() {
+		return id;
+	}
+
+	/**
+	 * @return the cost of the intervention.
+	 */
 	public double getImporte() {
 		double acum = 0;
 		for (Sustitucion sustitucion : sustituciones) {
@@ -44,32 +65,67 @@ public class Intervencion {
 		return acum;
 	}
 
-	public long getId() {
-		return id;
-	}
-
+	/**
+	 * @return the fault where the intervention takes place.
+	 */
 	public Averia getAveria() {
 		return averia;
 	}
 
-	void _setAveria( Averia averia ) {
-		this.averia = averia;
-	}
-
+	/**
+	 * @return the mechanic that performs the intervention.
+	 */
 	public Mecanico getMecanico() {
 		return mecanico;
 	}
 
-	void _setMecanico( Mecanico mecanico ) {
-		this.mecanico = mecanico;
-	}
-
+	/**
+	 * @return the minutes that the intervention needed to be completed.
+	 */
 	public int getMinutos() {
 		return minutos;
 	}
 
+	/**
+	 * Changes the amount of time in minutes that the action needed to be
+	 * completed.
+	 * 
+	 * @param minutos to set.
+	 */
 	public void setMinutos( int minutos ) {
 		this.minutos = minutos;
+	}
+
+	/**
+	 * @return a copy of the original set of substitutions performed.
+	 */
+	public Set<Sustitucion> getSustituciones() {
+		return new HashSet<>( sustituciones );
+	}
+
+	/**
+	 * @return the original set of substitutions performed.
+	 */
+	Set<Sustitucion> _getSustituciones() {
+		return sustituciones;
+	}
+
+	/**
+	 * Sets the fault where the action takes place.
+	 * 
+	 * @param averia to set
+	 */
+	void _setAveria( Averia averia ) {
+		this.averia = averia;
+	}
+
+	/**
+	 * Changes the mechanic that performs the action.
+	 * 
+	 * @param mecanico to set.
+	 */
+	void _setMecanico( Mecanico mecanico ) {
+		this.mecanico = mecanico;
 	}
 
 	@Override
@@ -107,14 +163,6 @@ public class Intervencion {
 	public String toString() {
 		return "Intervencion [averia=" + averia + ", mecanico=" + mecanico + ", minutos=" + minutos
 				+ "]";
-	}
-
-	Set<Sustitucion> _getSustituciones() {
-		return sustituciones;
-	}
-
-	public Set<Sustitucion> getSustituciones() {
-		return new HashSet<>( sustituciones );
 	}
 
 }

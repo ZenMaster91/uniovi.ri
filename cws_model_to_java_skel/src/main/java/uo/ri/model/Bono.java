@@ -11,36 +11,72 @@ public class Bono extends MedioPago {
 	@Column(unique = true)
 	private String codigo;
 
+	/**
+	 * Allocates a Bono object and initializes it so that it represents a pay
+	 * way.
+	 */
 	Bono() {}
 
+	/**
+	 * Allocates a Bono object and initializes it so that it represents a pay
+	 * way.
+	 * 
+	 * @param codigo of the bono.
+	 */
 	public Bono( String codigo ) {
 		super();
 		this.codigo = codigo;
 	}
 
+	/**
+	 * Allocates a Bono object and initializes it so that it represents a pay
+	 * way.
+	 * 
+	 * @param codigo of the bono.
+	 * @param disponible represents the amount of money that the bono contains.
+	 */
 	public Bono( String codigo, double disponible ) {
 		this( codigo );
 		this.disponible = disponible;
 	}
 
+	/**
+	 * @return the code of the bono.
+	 */
+	public String getCodigo() {
+		return codigo;
+	}
+
+	/**
+	 * @return the amount of money that the bono contains.
+	 */
 	public double getDisponible() {
 		return disponible;
 	}
 
+	/**
+	 * Changes the amount of money available in the bono.
+	 * 
+	 * @param disponible is the new amount of money available in the bono.
+	 */
 	public void setDisponible( double disponible ) {
 		this.disponible = disponible;
 	}
 
+	/**
+	 * @return the description of the bono.
+	 */
 	public String getDescripcion() {
 		return descripcion;
 	}
 
+	/**
+	 * Changes the description of the bono.
+	 * 
+	 * @param descripcion of the bono.
+	 */
 	public void setDescripcion( String descripcion ) {
 		this.descripcion = descripcion;
-	}
-
-	public String getCodigo() {
-		return codigo;
 	}
 
 	@Override

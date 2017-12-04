@@ -31,45 +31,125 @@ public class Cliente {
 	@OneToMany(mappedBy = "cliente")
 	private Set<MedioPago> mediosDePago = new HashSet<>();
 
+	/**
+	 * Allocates a client object and initializes it so that it represents a
+	 * client from the real world.
+	 */
 	Cliente() {}
 
+	/**
+	 * Allocates a client object and initializes it so that it represents a
+	 * client from the real world.
+	 * 
+	 * @param dni of the client.
+	 */
 	public Cliente( String dni ) {
 		super();
 		this.dni = dni;
 	}
 
+	/**
+	 * Allocates a client object and initializes it so that it represents a
+	 * client from the real world.
+	 *
+	 * @param dni to set.
+	 * @param nombre of the client
+	 * @param apellidos of the client.
+	 */
 	public Cliente( String dni, String nombre, String apellidos ) {
 		this( dni );
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 	}
 
+	/**
+	 * @return the unique id of the object. JPA.
+	 */
+	public Long getId() {
+		return id;
+	}
+
+	/**
+	 * @return the dni of the client.
+	 */
+	public String getDni() {
+		return dni;
+	}
+
+	/**
+	 * @return the name of the client.
+	 */
 	public String getNombre() {
 		return nombre;
 	}
 
+	/**
+	 * Changes the name of the client.
+	 * 
+	 * @param nombre of the client.
+	 */
 	public void setNombre( String nombre ) {
 		this.nombre = nombre;
 	}
 
+	/**
+	 * @return the surname of the client.
+	 */
 	public String getApellidos() {
 		return apellidos;
 	}
 
+	/**
+	 * Changes the surname of the client.
+	 * 
+	 * @param apellidos of the client to change/set.
+	 */
 	public void setApellidos( String apellidos ) {
 		this.apellidos = apellidos;
 	}
 
+	/**
+	 * @return the address of the client.
+	 */
 	public Address getAddress() {
 		return address;
 	}
 
+	/**
+	 * Changes the address of the client.
+	 * 
+	 * @param address of the client to change/set.
+	 */
 	public void setAddress( Address address ) {
 		this.address = address;
 	}
 
-	public String getDni() {
-		return dni;
+	/**
+	 * @return a copy of the original set of vehicles of the client.
+	 */
+	public Set<Vehiculo> getVehiculos() {
+		return new HashSet<>( vehiculos );
+	}
+
+	/**
+	 * @return a copy of the original set of payment types.
+	 */
+	public Set<MedioPago> getMediosPago() {
+		return new HashSet<>( mediosDePago );
+	}
+
+	/**
+	 * @return the original set of vehicles of the client.
+	 */
+	Set<Vehiculo> _getVehiculos() {
+		return vehiculos;
+	}
+
+	/**
+	 * @return the original set of payment types of the client.
+	 */
+	Set<MedioPago> _getMediosPago() {
+		return mediosDePago;
 	}
 
 	@Override
@@ -101,26 +181,6 @@ public class Cliente {
 	public String toString() {
 		return "Cliente [dni=" + dni + ", nombre=" + nombre + ", apellidos=" + apellidos
 				+ ", address=" + address + "]";
-	}
-
-	Set<Vehiculo> _getVehiculos() {
-		return vehiculos;
-	}
-
-	public Set<Vehiculo> getVehiculos() {
-		return new HashSet<>( vehiculos );
-	}
-
-	Set<MedioPago> _getMediosPago() {
-		return mediosDePago;
-	}
-
-	public Set<MedioPago> getMediosPago() {
-		return new HashSet<>( mediosDePago );
-	}
-
-	public Long getId() {
-		return id;
 	}
 
 }

@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Transient;
 
 @Entity
 public class Mecanico {
@@ -27,41 +26,106 @@ public class Mecanico {
 	@OneToMany(mappedBy = "mecanico")
 	private Set<Intervencion> intervenciones = new HashSet<>();
 
+	/**
+	 * Allocates a mechanic object and initializes.
+	 */
 	Mecanico() {}
 
+	/**
+	 * Allocates a mechanic object and initializes.
+	 * 
+	 * @param dni of the mechanic
+	 */
 	public Mecanico( String dni ) {
 		super();
 		this.dni = dni;
 	}
 
+	/**
+	 * Allocates a mechanic object and initializes.
+	 * 
+	 * @param dni of the mechanic.
+	 * @param nombre of the mechanic.
+	 * @param apellidos of the mechanic.
+	 */
 	public Mecanico( String dni, String nombre, String apellidos ) {
 		this( dni );
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 	}
 
+	/**
+	 * @return the unique if of the object. JPA.
+	 */
 	public long getId() {
 		return this.id;
 	}
 
-	public String getApellidos() {
-		return apellidos;
+	/**
+	 * @return the national Id of the mechanic.
+	 */
+	public String getDni() {
+		return dni;
 	}
 
-	public void setApellidos( String apellidos ) {
-		this.apellidos = apellidos;
-	}
-
+	/**
+	 * @return the name of the mechanic.
+	 */
 	public String getNombre() {
 		return nombre;
 	}
 
+	/**
+	 * Changes the name of the mechanic.
+	 * 
+	 * @param nombre of the mechanic.
+	 */
 	public void setNombre( String nombre ) {
 		this.nombre = nombre;
 	}
 
-	public String getDni() {
-		return dni;
+	/**
+	 * @return the surname of the mechanic.
+	 */
+	public String getApellidos() {
+		return apellidos;
+	}
+
+	/**
+	 * Changes the surname of the mechanic.
+	 * 
+	 * @param apellidos of the mechanic.
+	 */
+	public void setApellidos( String apellidos ) {
+		this.apellidos = apellidos;
+	}
+
+	/**
+	 * @return a copy of the original set of the faults assigned.
+	 */
+	public Set<Averia> getAsignadas() {
+		return new HashSet<>( asigandas );
+	}
+
+	/**
+	 * @return a copy of the original set of interventions.
+	 */
+	public Set<Intervencion> getIntervenciones() {
+		return new HashSet<>( intervenciones );
+	}
+
+	/**
+	 * @return the original set of the faults assigned.
+	 */
+	Set<Averia> _getAsignadas() {
+		return asigandas;
+	}
+
+	/**
+	 * @return the original set of interventions.
+	 */
+	Set<Intervencion> _getIntervenciones() {
+		return intervenciones;
 	}
 
 	@Override
@@ -87,22 +151,6 @@ public class Mecanico {
 		} else if (!dni.equals( other.dni ))
 			return false;
 		return true;
-	}
-
-	Set<Averia> _getAsignadas() {
-		return asigandas;
-	}
-
-	public Set<Averia> getAsignadas() {
-		return new HashSet<>( asigandas );
-	}
-
-	Set<Intervencion> _getIntervenciones() {
-		return intervenciones;
-	}
-
-	public Set<Intervencion> getIntervenciones() {
-		return new HashSet<>( intervenciones );
 	}
 
 }

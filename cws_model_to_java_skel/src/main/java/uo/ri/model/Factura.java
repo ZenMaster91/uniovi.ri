@@ -36,113 +36,109 @@ public class Factura {
 	@OneToMany(mappedBy = "factura")
 	private Set<Cargo> cargos = new HashSet<>();
 
+	/**
+	 * Allocates a invoice object and initializes it so that it represents an
+	 * invoice from the real world.
+	 */
 	Factura() {}
 
+	/**
+	 * Allocates a invoice object and initializes it so that it represents an
+	 * invoice from the real world.
+	 * 
+	 * @param numero is the number of the invoice.
+	 */
 	public Factura( Long numero ) {
 		super();
 		this.numero = numero;
 	}
 
+	/**
+	 * Allocates a invoice object and initializes it so that it represents an
+	 * invoice from the real world.
+	 * 
+	 * @param numero is the number of the invoice.
+	 * @param fecha is the date where the invoice takes place.
+	 */
 	public Factura( Long numero, Date fecha ) {
 		this( numero );
 		this.fecha.setTime( fecha );
 	}
 
+	/**
+	 * Allocates a invoice object and initializes it so that it represents an
+	 * invoice from the real world.
+	 * 
+	 * @param numero is the number of the invoice.
+	 * @param averias the list of faults that are billed in this invoice.
+	 * @throws BusinessException if there's any fault that has not been fixed
+	 *             yet.
+	 */
 	public Factura( long numero, List<Averia> averias ) throws BusinessException {
 		this( numero );
 		for (Averia a : averias) {
 			if (a.getStatus() != AveriaStatus.TERMINADA) {
 				throw new BusinessException( "Avería no terminada" );
 			} else {
-				// this.averias.add(a);
 				addAveria( a );
 			}
-
 		}
 	}
 
+	/**
+	 * Allocates a invoice object and initializes it so that it represents an
+	 * invoice from the real world.
+	 * 
+	 * @param numero is the number of the invoice.
+	 * @param fecha is the date where the invoice takes place.
+	 * @param averias the list of faults that are billed in this invoice.
+	 * @throws BusinessException if there's any fault that has not been fixed
+	 *             yet.
+	 */
 	public Factura( long numero, Date fecha, List<Averia> averias ) throws BusinessException {
 		this( numero, fecha );
 		for (Averia a : averias) {
 			if (a.getStatus() != AveriaStatus.TERMINADA) {
 				throw new BusinessException( "Avería no terminada" );
 			} else {
-				// this.averias.add(a);
 				addAveria( a );
 			}
-
 		}
-
 	}
 
+	/**
+	 * @return the id unique if of the object. JPA.
+	 */
 	public long getId() {
 		return this.id;
 	}
 
 	/**
-	 * Añade la averia a la factura
-	 * 
-	 * @param averia
+	 * @return the number of the invoice.
 	 */
-	public void addAveria( Averia averia ) {
-		// Verificar que la factura está en estado SIN_ABONAR
-		if (this.getStatus().equals( FacturaStatus.SIN_ABONAR )) {
-			// Verificar que La averia está TERMINADA
-			if (averia.getStatus().equals( AveriaStatus.TERMINADA )) {
-				// linkar factura y averia
-				Association.Facturar.link( this, averia );
-				// marcar la averia como FACTURADA ( averia.markAsInvoiced() )
-				averia.markAsInvoiced();
-				// calcular el importe
-				calcularImporte();
-			}
-		}
-
+	public Long getNumero() {
+		return numero;
 	}
 
 	/**
-	 * Calcula el importe de la avería y su IVA, teniendo en cuenta la fecha de
-	 * factura
-	 * 
-	 * @throws ParseException
+	 * @return the date of the invoice.
 	 */
-	void calcularImporte() {
-		double acum = 0;
-		for (Averia averia : averias) {
-			acum += averia.getImporte();
-		}
-		this.importe = Round.twoCents( ( acum * getIva() ) + acum );
-	}
-
-	/**
-	 * Elimina una averia de la factura, solo si está SIN_ABONAR y recalcula el
-	 * importe
-	 * 
-	 * @param averia
-	 */
-	public void removeAveria( Averia averia ) {
-		// verificar que la factura está sin abonar
-		if (this.getStatus().equals( FacturaStatus.SIN_ABONAR )) {
-			// desenlazar factura y averia
-			Association.Facturar.unlink( this, averia );
-			// la averia vuelve al estado FINALIZADA (
-			// averia.markBackToFinished() )
-			averia.markBackToFinished();
-			// volver a calcular el importe
-			// calcularImporte();
-			importe = 0;
-		}
-
-	}
-
 	public Calendar getFecha() {
 		return fecha;
 	}
 
+	/**
+	 * Changes the date of the invoice.
+	 * 
+	 * @param fecha is the new date.
+	 */
 	public void setFecha( Date fecha ) {
 		this.fecha.setTime( fecha );
 	}
 
+	/**
+	 * @return the tax percentage corresponding to the period of the invoice.
+	 */
 	public double getIva() {
 		Date limit = DateUtil.fromString( "01/07/2012" );
 
@@ -158,36 +154,99 @@ public class Factura {
 		return 0.21;
 	}
 
+	/**
+	 * @return the status of the invoice.
+	 */
 	public FacturaStatus getStatus() {
 		return facturaStatus;
 	}
 
-	public void setStatus( FacturaStatus status ) {
-		this.facturaStatus = status;
+	/**
+	 * Changes the status of the invoice.
+	 * 
+	 * @param newStatus is the new Status of the invoice.
+	 */
+	public void setStatus( FacturaStatus newStatus ) {
+		this.facturaStatus = newStatus;
 	}
 
-	public Long getNumero() {
-		return numero;
-	}
-
+	/**
+	 * @return the amount of the invoice.
+	 */
 	public double getImporte() {
 		return importe;
 	}
 
-	Set<Averia> _getAverias() {
-		return averias;
-	}
-
+	/**
+	 * @return a copy of the original set of faults that will be charged in the invoice.
+	 */
 	public Set<Averia> getAverias() {
 		return new HashSet<>( averias );
 	}
 
+	/**
+	 * @return a copy of the original set of payments done to this invoice.
+	 */
+	public Set<Cargo> getCargos() {
+		return new HashSet<>( cargos );
+	}
+
+	/**
+	 * Adds a given fault to the invoice.
+	 * 
+	 * @param averia to add to the invoice.
+	 */
+	public void addAveria( Averia averia ) {
+		if (this.getStatus().equals( FacturaStatus.SIN_ABONAR )) {
+			if (averia.getStatus().equals( AveriaStatus.TERMINADA )) {
+				Association.Facturar.link( this, averia );
+				averia.markAsInvoiced();
+				calcularImporte();
+			}
+		}
+	}
+
+	/**
+	 * Deletes the fault from the invoice. Only if the invoice has not been
+	 * payed.
+	 * 
+	 * @param averia to remove from the invoice.
+	 */
+	public void removeAveria( Averia averia ) {
+		if (this.getStatus().equals( FacturaStatus.SIN_ABONAR )) {
+			Association.Facturar.unlink( this, averia );
+			averia.markBackToFinished();
+			importe = 0;
+		}
+	
+	}
+
+	/**
+	 * @return original set of faults that will be charged in the invoice.
+	 */
+	Set<Averia> _getAverias() {
+		return averias;
+	}
+
+	/**
+	 * @return the original set of payments done to this invoice.
+	 */
 	Set<Cargo> _getCargos() {
 		return cargos;
 	}
 
-	public Set<Cargo> getCargos() {
-		return new HashSet<>( cargos );
+	/**
+	 * Calculates the import of the invoice.
+	 * 
+	 * @throws ParseException if any error while calculating the amount of the
+	 *             invoice.
+	 */
+	void calcularImporte() {
+		double acum = 0;
+		for (Averia averia : averias) {
+			acum += averia.getImporte();
+		}
+		this.importe = Round.twoCents( ( acum * getIva() ) + acum );
 	}
 
 }

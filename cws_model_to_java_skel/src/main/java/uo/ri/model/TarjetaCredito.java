@@ -13,31 +13,58 @@ public class TarjetaCredito extends MedioPago {
 	private String tipo;
 	private Date validez;
 
+	/**
+	 * Allocates a credit card object and initializes it.
+	 */
 	TarjetaCredito() {}
 
+	/**
+	 * Allocates a credit card object and initializes it.
+	 * 
+	 * @param numero is the number of the credit card.
+	 */
 	public TarjetaCredito( String numero ) {
 		super();
 		this.numero = numero;
 	}
 
+	/**
+	 * @return the number of the credit card.
+	 */
+	public String getNumero() {
+		return numero;
+	}
+
+	/**
+	 * @return the type of credit card.
+	 */
 	public String getTipo() {
 		return tipo;
 	}
 
+	/**
+	 * Changes the type of the card.
+	 * 
+	 * @param tipo to set.
+	 */
 	public void setTipo( String tipo ) {
 		this.tipo = tipo;
 	}
 
+	/**
+	 * @return the expiration date of the card.
+	 */
 	public Date getValidez() {
 		return validez;
 	}
 
+	/**
+	 * Changes the expiration date of the credit card.
+	 * 
+	 * @param validez is the expiration date of the card.
+	 */
 	public void setValidez( Date validez ) {
 		this.validez = validez;
-	}
-
-	public String getNumero() {
-		return numero;
 	}
 
 	@Override

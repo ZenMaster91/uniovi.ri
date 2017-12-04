@@ -23,41 +23,92 @@ public class Repuesto {
 	@OneToMany(mappedBy = "repuesto")
 	private Set<Sustitucion> sustituciones = new HashSet<>();
 
+	/**
+	 * Allocates a replacement object and initializes it so that it represents.
+	 */
 	Repuesto() {}
 
+	/**
+	 * Allocates a replacement object and initializes it so that it represents.
+	 * 
+	 * @param codigo is the code of the 
+	 */
 	public Repuesto( String codigo ) {
 		super();
 		this.codigo = codigo;
 	}
 
+	/**
+	 * Allocates a replacement object and initializes it so that it represents.
+	 * 
+	 * @param codigo of the replacement.
+	 * @param descripcion of the replacement.
+	 * @param precio of the replacement.
+	 */
 	public Repuesto( String codigo, String descripcion, double precio ) {
 		this( codigo );
 		this.descripcion = descripcion;
 		this.precio = precio;
 	}
 
+	/**
+	 * @return the unique id of the object. JPA.
+	 */
 	public long getId() {
 		return this.id;
 	}
 
+	/**
+	 * @return the code of the replacement.
+	 */
+	public String getCodigo() {
+		return codigo;
+	}
+
+	/**
+	 * @return the description of the replacement.
+	 */
 	public String getDescripcion() {
 		return descripcion;
 	}
 
+	/**
+	 * Changes the description of the replacement.
+	 * 
+	 * @param descripcion to set.
+	 */
 	public void setDescripcion( String descripcion ) {
 		this.descripcion = descripcion;
 	}
 
+	/**
+	 * @return the price of the replacement.
+	 */
 	public double getPrecio() {
 		return precio;
 	}
 
+	/**
+	 * Changes the price of the replacement.
+	 * 
+	 * @param precio to set.
+	 */
 	public void setPrecio( double precio ) {
 		this.precio = precio;
 	}
 
-	public String getCodigo() {
-		return codigo;
+	/**
+	 * @return a copy of the original set of replacements.
+	 */
+	public Set<Sustitucion> getSustituciones() {
+		return new HashSet<Sustitucion>( sustituciones );
+	}
+
+	/**
+	 * @return the original set of replacements.
+	 */
+	Set<Sustitucion> _getSustituciones() {
+		return sustituciones;
 	}
 
 	@Override
@@ -83,14 +134,6 @@ public class Repuesto {
 		} else if (!codigo.equals( other.codigo ))
 			return false;
 		return true;
-	}
-
-	Set<Sustitucion> _getSustituciones() {
-		return sustituciones;
-	}
-
-	public Set<Sustitucion> getSustituciones() {
-		return new HashSet<>( sustituciones );
 	}
 
 }

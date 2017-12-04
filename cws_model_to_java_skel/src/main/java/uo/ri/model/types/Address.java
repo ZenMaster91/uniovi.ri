@@ -5,12 +5,20 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Address {
 
-	private String street;
-	private String city;
-	private String zipcode;
+	private String street, city, zipcode;
 
+	/**
+	 * Default empty constructor, only visible at package level. JPA.
+	 */
 	Address() {}
 
+	/**
+	 * Address type represents a physical address from the real world.
+	 * 
+	 * @param street
+	 * @param city
+	 * @param zipcode as a string.
+	 */
 	public Address( String street, String city, String zipcode ) {
 		super();
 		this.street = street;
@@ -18,14 +26,23 @@ public class Address {
 		this.zipcode = zipcode;
 	}
 
+	/**
+	 * @return the street of the address.
+	 */
 	public String getStreet() {
 		return street;
 	}
 
+	/**
+	 * @return the city of the address.
+	 */
 	public String getCity() {
 		return city;
 	}
 
+	/**
+	 * @return the zip code of the address.
+	 */
 	public String getZipcode() {
 		return zipcode;
 	}
