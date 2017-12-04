@@ -3,19 +3,39 @@ package uo.ri.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class MedioPago {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 
 	protected double acumulado = 0.0;
 
+	@ManyToOne
 	private Cliente cliente;
-
+	@OneToMany(mappedBy = "medioPago")
 	private Set<Cargo> cargos = new HashSet<>();
+
+	public long getId() {
+		return id;
+	}
 
 	public Cliente getCliente() {
 		return cliente;
 	}
 
-	void _setCliente(Cliente cliente) {
+	void _setCliente( Cliente cliente ) {
 		this.cliente = cliente;
 	}
 
@@ -23,7 +43,7 @@ public abstract class MedioPago {
 		return acumulado;
 	}
 
-	public void setAcumulado(double acumulado) {
+	public void setAcumulado( double acumulado ) {
 		this.acumulado = acumulado;
 	}
 
@@ -31,12 +51,12 @@ public abstract class MedioPago {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((cliente == null) ? 0 : cliente.hashCode());
+		result = prime * result + ( ( cliente == null ) ? 0 : cliente.hashCode() );
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals( Object obj ) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -47,7 +67,7 @@ public abstract class MedioPago {
 		if (cliente == null) {
 			if (other.cliente != null)
 				return false;
-		} else if (!cliente.equals(other.cliente))
+		} else if (!cliente.equals( other.cliente ))
 			return false;
 		return true;
 	}
@@ -57,7 +77,7 @@ public abstract class MedioPago {
 	}
 
 	public Set<Cargo> getCargos() {
-		return new HashSet<>(cargos);
+		return new HashSet<>( cargos );
 	}
 
 }

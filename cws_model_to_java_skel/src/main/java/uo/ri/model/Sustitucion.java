@@ -1,14 +1,32 @@
 package uo.ri.model;
 
-public class Sustitucion {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
+@Entity
+public class Sustitucion {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+
+	@ManyToOne
 	private Repuesto repuesto;
+	@ManyToOne
 	private Intervencion intervencion;
 	private int cantidad;
 
-	public Sustitucion(Repuesto repuesto, Intervencion intervencion) {
+	Sustitucion() {}
+
+	public Sustitucion( Repuesto repuesto, Intervencion intervencion ) {
 		super();
-		Association.Sustituir.link(repuesto, this, intervencion);
+		Association.Sustituir.link( repuesto, this, intervencion );
+	}
+
+	public long getId() {
+		return this.id;
 	}
 
 	public double getImporte() {
@@ -19,7 +37,7 @@ public class Sustitucion {
 		return repuesto;
 	}
 
-	void _setRepuesto(Repuesto repuesto) {
+	void _setRepuesto( Repuesto repuesto ) {
 		this.repuesto = repuesto;
 	}
 
@@ -27,7 +45,7 @@ public class Sustitucion {
 		return intervencion;
 	}
 
-	void _setIntervencion(Intervencion intervencion) {
+	void _setIntervencion( Intervencion intervencion ) {
 		this.intervencion = intervencion;
 	}
 
@@ -35,7 +53,7 @@ public class Sustitucion {
 		return cantidad;
 	}
 
-	public void setCantidad(int cantidad) {
+	public void setCantidad( int cantidad ) {
 		this.cantidad = cantidad;
 	}
 
@@ -43,13 +61,13 @@ public class Sustitucion {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((intervencion == null) ? 0 : intervencion.hashCode());
-		result = prime * result + ((repuesto == null) ? 0 : repuesto.hashCode());
+		result = prime * result + ( ( intervencion == null ) ? 0 : intervencion.hashCode() );
+		result = prime * result + ( ( repuesto == null ) ? 0 : repuesto.hashCode() );
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals( Object obj ) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -60,19 +78,20 @@ public class Sustitucion {
 		if (intervencion == null) {
 			if (other.intervencion != null)
 				return false;
-		} else if (!intervencion.equals(other.intervencion))
+		} else if (!intervencion.equals( other.intervencion ))
 			return false;
 		if (repuesto == null) {
 			if (other.repuesto != null)
 				return false;
-		} else if (!repuesto.equals(other.repuesto))
+		} else if (!repuesto.equals( other.repuesto ))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Sustitucion [repuesto=" + repuesto + ", intervencion=" + intervencion + ", cantidad=" + cantidad + "]";
+		return "Sustitucion [repuesto=" + repuesto + ", intervencion=" + intervencion
+				+ ", cantidad=" + cantidad + "]";
 	}
 
 }

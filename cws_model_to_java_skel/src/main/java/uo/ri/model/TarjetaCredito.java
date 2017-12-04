@@ -2,13 +2,20 @@ package uo.ri.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+@Entity
 public class TarjetaCredito extends MedioPago {
 
+	@Column(unique = true)
 	private String numero;
 	private String tipo;
 	private Date validez;
 
-	public TarjetaCredito(String numero) {
+	TarjetaCredito() {}
+
+	public TarjetaCredito( String numero ) {
 		super();
 		this.numero = numero;
 	}
@@ -17,7 +24,7 @@ public class TarjetaCredito extends MedioPago {
 		return tipo;
 	}
 
-	public void setTipo(String tipo) {
+	public void setTipo( String tipo ) {
 		this.tipo = tipo;
 	}
 
@@ -25,7 +32,7 @@ public class TarjetaCredito extends MedioPago {
 		return validez;
 	}
 
-	public void setValidez(Date validez) {
+	public void setValidez( Date validez ) {
 		this.validez = validez;
 	}
 
@@ -37,12 +44,12 @@ public class TarjetaCredito extends MedioPago {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((numero == null) ? 0 : numero.hashCode());
+		result = prime * result + ( ( numero == null ) ? 0 : numero.hashCode() );
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals( Object obj ) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -53,14 +60,15 @@ public class TarjetaCredito extends MedioPago {
 		if (numero == null) {
 			if (other.numero != null)
 				return false;
-		} else if (!numero.equals(other.numero))
+		} else if (!numero.equals( other.numero ))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "TarjetaCredito [numero=" + numero + ", tipo=" + tipo + ", validez=" + validez + ", acumulado="
+		return "TarjetaCredito [numero=" + numero + ", tipo=" + tipo + ", validez=" + validez
+				+ ", acumulado="
 				+ acumulado + "]";
 	}
 

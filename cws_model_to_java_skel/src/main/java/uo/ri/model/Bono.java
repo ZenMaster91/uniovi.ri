@@ -1,21 +1,33 @@
 package uo.ri.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+@Entity
 public class Bono extends MedioPago {
 
 	private double disponible = 0.0;
 	private String descripcion;
+	@Column(unique = true)
 	private String codigo;
 
-	public Bono(String codigo) {
+	Bono() {}
+
+	public Bono( String codigo ) {
 		super();
 		this.codigo = codigo;
+	}
+
+	public Bono( String codigo, double disponible ) {
+		this( codigo );
+		this.disponible = disponible;
 	}
 
 	public double getDisponible() {
 		return disponible;
 	}
 
-	public void setDisponible(double disponible) {
+	public void setDisponible( double disponible ) {
 		this.disponible = disponible;
 	}
 
@@ -23,7 +35,7 @@ public class Bono extends MedioPago {
 		return descripcion;
 	}
 
-	public void setDescripcion(String descripcion) {
+	public void setDescripcion( String descripcion ) {
 		this.descripcion = descripcion;
 	}
 
@@ -35,12 +47,12 @@ public class Bono extends MedioPago {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		result = prime * result + ( ( codigo == null ) ? 0 : codigo.hashCode() );
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals( Object obj ) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -51,14 +63,15 @@ public class Bono extends MedioPago {
 		if (codigo == null) {
 			if (other.codigo != null)
 				return false;
-		} else if (!codigo.equals(other.codigo))
+		} else if (!codigo.equals( other.codigo ))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Bono [disponible=" + disponible + ", descripcion=" + descripcion + ", codigo=" + codigo + ", acumulado="
+		return "Bono [disponible=" + disponible + ", descripcion=" + descripcion + ", codigo="
+				+ codigo + ", acumulado="
 				+ acumulado + "]";
 	}
 

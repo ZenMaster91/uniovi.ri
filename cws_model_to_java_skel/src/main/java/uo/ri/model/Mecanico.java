@@ -3,31 +3,52 @@ package uo.ri.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
+@Entity
 public class Mecanico {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 
 	private String dni;
 	private String apellidos;
 	private String nombre;
 
+	@OneToMany(mappedBy = "mecanico")
 	private Set<Averia> asigandas = new HashSet<>();
+
+	@OneToMany(mappedBy = "mecanico")
 	private Set<Intervencion> intervenciones = new HashSet<>();
 
-	public Mecanico(String dni) {
+	Mecanico() {}
+
+	public Mecanico( String dni ) {
 		super();
 		this.dni = dni;
 	}
 
-	public Mecanico(String dni, String nombre, String apellidos) {
-		this(dni);
+	public Mecanico( String dni, String nombre, String apellidos ) {
+		this( dni );
 		this.nombre = nombre;
 		this.apellidos = apellidos;
+	}
+
+	public long getId() {
+		return this.id;
 	}
 
 	public String getApellidos() {
 		return apellidos;
 	}
 
-	public void setApellidos(String apellidos) {
+	public void setApellidos( String apellidos ) {
 		this.apellidos = apellidos;
 	}
 
@@ -35,7 +56,7 @@ public class Mecanico {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
+	public void setNombre( String nombre ) {
 		this.nombre = nombre;
 	}
 
@@ -47,12 +68,12 @@ public class Mecanico {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((dni == null) ? 0 : dni.hashCode());
+		result = prime * result + ( ( dni == null ) ? 0 : dni.hashCode() );
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals( Object obj ) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -63,7 +84,7 @@ public class Mecanico {
 		if (dni == null) {
 			if (other.dni != null)
 				return false;
-		} else if (!dni.equals(other.dni))
+		} else if (!dni.equals( other.dni ))
 			return false;
 		return true;
 	}
@@ -73,7 +94,7 @@ public class Mecanico {
 	}
 
 	public Set<Averia> getAsignadas() {
-		return new HashSet<>(asigandas);
+		return new HashSet<>( asigandas );
 	}
 
 	Set<Intervencion> _getIntervenciones() {
@@ -81,7 +102,7 @@ public class Mecanico {
 	}
 
 	public Set<Intervencion> getIntervenciones() {
-		return new HashSet<>(intervenciones);
+		return new HashSet<>( intervenciones );
 	}
 
 }

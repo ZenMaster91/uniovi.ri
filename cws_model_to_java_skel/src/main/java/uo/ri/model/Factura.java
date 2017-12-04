@@ -7,57 +7,76 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 import alb.util.date.DateUtil;
 import alb.util.math.Round;
 import uo.ri.model.exception.BusinessException;
 import uo.ri.model.types.AveriaStatus;
 import uo.ri.model.types.FacturaStatus;
 
+@Entity
 public class Factura {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	private Long numero;
-	private Calendar fecha;
+	private Calendar fecha = Calendar.getInstance();
 	private double importe;
 	private FacturaStatus facturaStatus = FacturaStatus.SIN_ABONAR;
 
+	@OneToMany(mappedBy = "factura")
 	private Set<Averia> averias = new HashSet<>();
+
+	@OneToMany(mappedBy = "factura")
 	private Set<Cargo> cargos = new HashSet<>();
 
-	public Factura(Long numero) {
+	Factura() {}
+
+	public Factura( Long numero ) {
 		super();
 		this.numero = numero;
 	}
 
-	public Factura(Long numero, Date fecha) {
-		this(numero);
-		this.fecha.setTime(fecha);
+	public Factura( Long numero, Date fecha ) {
+		this( numero );
+		this.fecha.setTime( fecha );
 	}
 
-	public Factura(long numero, List<Averia> averias) throws BusinessException {
-		this(numero);
+	public Factura( long numero, List<Averia> averias ) throws BusinessException {
+		this( numero );
 		for (Averia a : averias) {
 			if (a.getStatus() != AveriaStatus.TERMINADA) {
-				throw new BusinessException("Avería no terminada");
+				throw new BusinessException( "Avería no terminada" );
 			} else {
 				// this.averias.add(a);
-				addAveria(a);
+				addAveria( a );
 			}
 
 		}
 	}
 
-	public Factura(long numero, Date fecha, List<Averia> averias) throws BusinessException {
-		this(numero, fecha);
+	public Factura( long numero, Date fecha, List<Averia> averias ) throws BusinessException {
+		this( numero, fecha );
 		for (Averia a : averias) {
 			if (a.getStatus() != AveriaStatus.TERMINADA) {
-				throw new BusinessException("Avería no terminada");
+				throw new BusinessException( "Avería no terminada" );
 			} else {
 				// this.averias.add(a);
-				addAveria(a);
+				addAveria( a );
 			}
 
 		}
 
+	}
+
+	public long getId() {
+		return this.id;
 	}
 
 	/**
@@ -65,13 +84,13 @@ public class Factura {
 	 * 
 	 * @param averia
 	 */
-	public void addAveria(Averia averia) {
+	public void addAveria( Averia averia ) {
 		// Verificar que la factura está en estado SIN_ABONAR
-		if (this.getStatus().equals(FacturaStatus.SIN_ABONAR)) {
+		if (this.getStatus().equals( FacturaStatus.SIN_ABONAR )) {
 			// Verificar que La averia está TERMINADA
-			if (averia.getStatus().equals(AveriaStatus.TERMINADA)) {
+			if (averia.getStatus().equals( AveriaStatus.TERMINADA )) {
 				// linkar factura y averia
-				Association.Facturar.link(this, averia);
+				Association.Facturar.link( this, averia );
 				// marcar la averia como FACTURADA ( averia.markAsInvoiced() )
 				averia.markAsInvoiced();
 				// calcular el importe
@@ -92,7 +111,7 @@ public class Factura {
 		for (Averia averia : averias) {
 			acum += averia.getImporte();
 		}
-		this.importe = Round.twoCents((acum * getIva()) + acum);
+		this.importe = Round.twoCents( ( acum * getIva() ) + acum );
 	}
 
 	/**
@@ -101,12 +120,13 @@ public class Factura {
 	 * 
 	 * @param averia
 	 */
-	public void removeAveria(Averia averia) {
+	public void removeAveria( Averia averia ) {
 		// verificar que la factura está sin abonar
-		if (this.getStatus().equals(FacturaStatus.SIN_ABONAR)) {
+		if (this.getStatus().equals( FacturaStatus.SIN_ABONAR )) {
 			// desenlazar factura y averia
-			Association.Facturar.unlink(this, averia);
-			// la averia vuelve al estado FINALIZADA ( averia.markBackToFinished() )
+			Association.Facturar.unlink( this, averia );
+			// la averia vuelve al estado FINALIZADA (
+			// averia.markBackToFinished() )
 			averia.markBackToFinished();
 			// volver a calcular el importe
 			// calcularImporte();
@@ -119,17 +139,19 @@ public class Factura {
 		return fecha;
 	}
 
-	public void setFecha(Date fecha) {
-		this.fecha.setTime(fecha);
+	public void setFecha( Date fecha ) {
+		this.fecha.setTime( fecha );
 	}
 
 	public double getIva() {
-		Date limit = DateUtil.fromString("01/07/2012");
+		Date limit = DateUtil.fromString( "01/07/2012" );
 
 		if (this.fecha != null) {
 			Date actual = DateUtil.fromString(
-					"" + this.fecha.get(Calendar.DAY_OF_MONTH) + "/" + this.fecha.get(Calendar.MONTH) + "/" + this.fecha.get(Calendar.YEAR) + "");
-			if (actual.before(limit)) {
+					"" + this.fecha.get( Calendar.DAY_OF_MONTH ) + "/"
+							+ this.fecha.get( Calendar.MONTH ) + "/"
+							+ this.fecha.get( Calendar.YEAR ) + "" );
+			if (actual.before( limit )) {
 				return 0.18;
 			}
 		}
@@ -140,7 +162,7 @@ public class Factura {
 		return facturaStatus;
 	}
 
-	public void setStatus(FacturaStatus status) {
+	public void setStatus( FacturaStatus status ) {
 		this.facturaStatus = status;
 	}
 
@@ -157,7 +179,7 @@ public class Factura {
 	}
 
 	public Set<Averia> getAverias() {
-		return new HashSet<>(averias);
+		return new HashSet<>( averias );
 	}
 
 	Set<Cargo> _getCargos() {
@@ -165,7 +187,7 @@ public class Factura {
 	}
 
 	public Set<Cargo> getCargos() {
-		return new HashSet<>(cargos);
+		return new HashSet<>( cargos );
 	}
 
 }
