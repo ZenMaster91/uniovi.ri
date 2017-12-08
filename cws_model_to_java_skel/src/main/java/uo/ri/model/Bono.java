@@ -3,13 +3,11 @@ package uo.ri.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-@Entity
-public class Bono extends MedioPago {
+@Entity public class Bono extends MedioPago {
 
 	private double disponible = 0.0;
 	private String descripcion;
-	@Column(unique = true)
-	private String codigo;
+	@Column(unique = true) private String codigo;
 
 	/**
 	 * Allocates a Bono object and initializes it so that it represents a pay
@@ -79,16 +77,14 @@ public class Bono extends MedioPago {
 		this.descripcion = descripcion;
 	}
 
-	@Override
-	public int hashCode() {
+	@Override public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ( ( codigo == null ) ? 0 : codigo.hashCode() );
 		return result;
 	}
 
-	@Override
-	public boolean equals( Object obj ) {
+	@Override public boolean equals( Object obj ) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -104,8 +100,7 @@ public class Bono extends MedioPago {
 		return true;
 	}
 
-	@Override
-	public String toString() {
+	@Override public String toString() {
 		return "Bono [disponible=" + disponible + ", descripcion=" + descripcion + ", codigo="
 				+ codigo + ", acumulado="
 				+ acumulado + "]";

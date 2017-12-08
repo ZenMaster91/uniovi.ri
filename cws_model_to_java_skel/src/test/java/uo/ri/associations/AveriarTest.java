@@ -20,8 +20,7 @@ public class AveriarTest {
 	private TipoVehiculo tipoVehiculo;
 	private Cliente cliente;
 
-	@Before
-	public void setUp() throws BusinessException {
+	@Before public void setUp() throws BusinessException {
 		cliente = new Cliente( "dni-cliente", "nombre", "apellidos" );
 		vehiculo = new Vehiculo( "1234 GJI", "seat", "ibiza" );
 		Association.Poseer.link( cliente, vehiculo );
@@ -32,8 +31,7 @@ public class AveriarTest {
 		averia = new Averia( vehiculo, "falla la junta la trocla" );
 	}
 
-	@Test
-	public void testAveriarLinked() throws BusinessException {
+	@Test public void testAveriarLinked() throws BusinessException {
 		// The constructor of "Averia" creates the link with "vehiculo"
 		// It calls Association.Averiar.link(...)
 		assertTrue( vehiculo.getAverias().contains( averia ) );
@@ -41,16 +39,14 @@ public class AveriarTest {
 		assertTrue( vehiculo.getNumAverias() == 1 );
 	}
 
-	@Test
-	public void testAveriarUnlink() throws BusinessException {
+	@Test public void testAveriarUnlink() throws BusinessException {
 		Association.Averiar.unlink( vehiculo, averia );
 
 		assertTrue( !vehiculo.getAverias().contains( averia ) );
 		assertTrue( averia.getVehiculo() == null );
 	}
 
-	@Test
-	public void testAveriarUnlinkTwice() throws BusinessException {
+	@Test public void testAveriarUnlinkTwice() throws BusinessException {
 		Association.Averiar.unlink( vehiculo, averia );
 		Association.Averiar.unlink( vehiculo, averia );
 
@@ -58,8 +54,7 @@ public class AveriarTest {
 		assertTrue( averia.getVehiculo() == null );
 	}
 
-	@Test
-	public void testSafeReturn() throws BusinessException {
+	@Test public void testSafeReturn() throws BusinessException {
 		Set<Averia> averias = vehiculo.getAverias();
 		averias.remove( averia );
 

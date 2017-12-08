@@ -9,16 +9,11 @@ import javax.persistence.ManyToOne;
 import uo.ri.model.exception.BusinessException;
 import uo.ri.model.types.FacturaStatus;
 
-@Entity
-public class Cargo {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+@Entity public class Cargo {
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) private long id;
 
-	@ManyToOne
-	private Factura factura;
-	@ManyToOne
-	private MedioPago medioPago;
+	@ManyToOne private Factura factura;
+	@ManyToOne private MedioPago medioPago;
 	private double importe = 0.0;
 
 	/**
@@ -75,7 +70,7 @@ public class Cargo {
 			medioPago.acumulado -= this.importe;
 			Association.Cargar.unlink( this );
 		}
-	
+
 	}
 
 	/**
@@ -96,8 +91,7 @@ public class Cargo {
 		this.medioPago = medioPago;
 	}
 
-	@Override
-	public int hashCode() {
+	@Override public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ( ( factura == null ) ? 0 : factura.hashCode() );
@@ -105,8 +99,7 @@ public class Cargo {
 		return result;
 	}
 
-	@Override
-	public boolean equals( Object obj ) {
+	@Override public boolean equals( Object obj ) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -127,8 +120,7 @@ public class Cargo {
 		return true;
 	}
 
-	@Override
-	public String toString() {
+	@Override public String toString() {
 		return "Cargo [factura=" + factura + ", medioPago=" + medioPago + ", importe=" + importe
 				+ "]";
 	}

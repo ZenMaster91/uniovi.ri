@@ -12,20 +12,14 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class MedioPago {
+@Entity @Inheritance(strategy = InheritanceType.JOINED) public abstract class MedioPago {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) private long id;
 
 	protected double acumulado = 0.0;
 
-	@ManyToOne
-	private Cliente cliente;
-	@OneToMany(mappedBy = "medioPago")
-	private Set<Cargo> cargos = new HashSet<>();
+	@ManyToOne private Cliente cliente;
+	@OneToMany(mappedBy = "medioPago") private Set<Cargo> cargos = new HashSet<>();
 
 	/**
 	 * @return the unique id of the object. JPA.
@@ -80,16 +74,14 @@ public abstract class MedioPago {
 		return cargos;
 	}
 
-	@Override
-	public int hashCode() {
+	@Override public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ( ( cliente == null ) ? 0 : cliente.hashCode() );
 		return result;
 	}
 
-	@Override
-	public boolean equals( Object obj ) {
+	@Override public boolean equals( Object obj ) {
 		if (this == obj)
 			return true;
 		if (obj == null)

@@ -32,8 +32,7 @@ public class FacturarTest {
 	private Cliente cliente;
 	private Factura factura;
 
-	@Before
-	public void setUp() throws BusinessException {
+	@Before public void setUp() throws BusinessException {
 		cliente = new Cliente( "dni-cliente", "nombre", "apellidos" );
 		vehiculo = new Vehiculo( "1234 GJI", "seat", "ibiza" );
 		Association.Poseer.link( cliente, vehiculo );
@@ -59,8 +58,7 @@ public class FacturarTest {
 		factura.addAveria( averia );
 	}
 
-	@Test
-	public void testFacturarLinked() throws BusinessException {
+	@Test public void testFacturarLinked() throws BusinessException {
 		assertTrue( factura.getAverias().contains( averia ) );
 		assertTrue( factura.getImporte() > 0.0 );
 
@@ -68,8 +66,7 @@ public class FacturarTest {
 		assertTrue( averia.getStatus().equals( AveriaStatus.FACTURADA ) );
 	}
 
-	@Test
-	public void testFacturarUnlink() throws BusinessException {
+	@Test public void testFacturarUnlink() throws BusinessException {
 		factura.removeAveria( averia );
 
 		assertTrue( !factura.getAverias().contains( averia ) );
@@ -80,8 +77,7 @@ public class FacturarTest {
 		assertTrue( averia.getStatus().equals( AveriaStatus.TERMINADA ) );
 	}
 
-	@Test
-	public void testSafeReturn() throws BusinessException {
+	@Test public void testSafeReturn() throws BusinessException {
 		Set<Averia> facturadas = factura.getAverias();
 		facturadas.remove( averia );
 

@@ -22,8 +22,7 @@ public class AsignarTest {
 	private TipoVehiculo tipoVehiculo;
 	private Cliente cliente;
 
-	@Before
-	public void setUp() throws BusinessException {
+	@Before public void setUp() throws BusinessException {
 		cliente = new Cliente( "dni-cliente", "nombre", "apellidos" );
 		vehiculo = new Vehiculo( "1234 GJI", "seat", "ibiza" );
 		Association.Poseer.link( cliente, vehiculo );
@@ -37,14 +36,12 @@ public class AsignarTest {
 		averia.assignTo( mecanico );
 	}
 
-	@Test
-	public void testAsignarLinked() throws BusinessException {
+	@Test public void testAsignarLinked() throws BusinessException {
 		assertTrue( mecanico.getAsignadas().contains( averia ) );
 		assertTrue( averia.getMecanico() == mecanico );
 	}
 
-	@Test
-	public void testAsignarUnlink() throws BusinessException {
+	@Test public void testAsignarUnlink() throws BusinessException {
 		averia.desassign();
 
 		assertTrue( !mecanico.getAsignadas().contains( averia ) );
@@ -52,8 +49,7 @@ public class AsignarTest {
 		assertTrue( averia.getMecanico() == null );
 	}
 
-	@Test
-	public void testSafeReturn() throws BusinessException {
+	@Test public void testSafeReturn() throws BusinessException {
 		Set<Averia> asignadas = mecanico.getAsignadas();
 		asignadas.remove( averia );
 

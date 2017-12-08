@@ -5,11 +5,9 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-@Entity
-public class TarjetaCredito extends MedioPago {
+@Entity public class TarjetaCredito extends MedioPago {
 
-	@Column(unique = true)
-	private String numero;
+	@Column(unique = true) private String numero;
 	private String tipo;
 	private Date validez;
 
@@ -67,16 +65,14 @@ public class TarjetaCredito extends MedioPago {
 		this.validez = validez;
 	}
 
-	@Override
-	public int hashCode() {
+	@Override public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ( ( numero == null ) ? 0 : numero.hashCode() );
 		return result;
 	}
 
-	@Override
-	public boolean equals( Object obj ) {
+	@Override public boolean equals( Object obj ) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -92,8 +88,7 @@ public class TarjetaCredito extends MedioPago {
 		return true;
 	}
 
-	@Override
-	public String toString() {
+	@Override public String toString() {
 		return "TarjetaCredito [numero=" + numero + ", tipo=" + tipo + ", validez=" + validez
 				+ ", acumulado="
 				+ acumulado + "]";

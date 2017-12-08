@@ -12,23 +12,17 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-@Entity
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = "AVERIA_ID, MECANICO_ID") })
-public class Intervencion {
+@Entity @Table(uniqueConstraints = {
+		@UniqueConstraint(columnNames = "AVERIA_ID, MECANICO_ID") }) public class Intervencion {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
 
-	@ManyToOne
-	private Averia averia;
+	@ManyToOne private Averia averia;
 
-	@ManyToOne
-	private Mecanico mecanico;
+	@ManyToOne private Mecanico mecanico;
 	private int minutos;
 
-	@OneToMany(mappedBy = "intervencion")
-	private Set<Sustitucion> sustituciones = new HashSet<>();
+	@OneToMany(mappedBy = "intervencion") private Set<Sustitucion> sustituciones = new HashSet<>();
 
 	/**
 	 * Allocates a intervention object and initializes it.
@@ -128,8 +122,7 @@ public class Intervencion {
 		this.mecanico = mecanico;
 	}
 
-	@Override
-	public int hashCode() {
+	@Override public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ( ( averia == null ) ? 0 : averia.hashCode() );
@@ -137,8 +130,7 @@ public class Intervencion {
 		return result;
 	}
 
-	@Override
-	public boolean equals( Object obj ) {
+	@Override public boolean equals( Object obj ) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -159,8 +151,7 @@ public class Intervencion {
 		return true;
 	}
 
-	@Override
-	public String toString() {
+	@Override public String toString() {
 		return "Intervencion [averia=" + averia + ", mecanico=" + mecanico + ", minutos=" + minutos
 				+ "]";
 	}

@@ -9,22 +9,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-@Entity
-public class Mecanico {
+@Entity public class Mecanico {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) private long id;
 
 	private String dni;
 	private String apellidos;
 	private String nombre;
 
-	@OneToMany(mappedBy = "mecanico")
-	private Set<Averia> asigandas = new HashSet<>();
+	@OneToMany(mappedBy = "mecanico") private Set<Averia> asigandas = new HashSet<>();
 
-	@OneToMany(mappedBy = "mecanico")
-	private Set<Intervencion> intervenciones = new HashSet<>();
+	@OneToMany(mappedBy = "mecanico") private Set<Intervencion> intervenciones = new HashSet<>();
 
 	/**
 	 * Allocates a mechanic object and initializes.
@@ -128,16 +123,14 @@ public class Mecanico {
 		return intervenciones;
 	}
 
-	@Override
-	public int hashCode() {
+	@Override public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ( ( dni == null ) ? 0 : dni.hashCode() );
 		return result;
 	}
 
-	@Override
-	public boolean equals( Object obj ) {
+	@Override public boolean equals( Object obj ) {
 		if (this == obj)
 			return true;
 		if (obj == null)

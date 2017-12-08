@@ -16,31 +16,23 @@ import javax.persistence.UniqueConstraint;
 import alb.util.assertion.Assert;
 import uo.ri.model.types.AveriaStatus;
 
-@Entity
-@Table(uniqueConstraints = {
+@Entity @Table(uniqueConstraints = {
 		@UniqueConstraint(columnNames = "VEHICULO_ID, FECHA")
-})
-public class Averia {
+}) public class Averia {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
 	private String descripcion;
 	private Date fecha;
 	private double importe = 0.0;
 	private AveriaStatus status = AveriaStatus.ABIERTA;
 
-	@ManyToOne
-	private Vehiculo vehiculo;
+	@ManyToOne private Vehiculo vehiculo;
 
-	@ManyToOne
-	private Mecanico mecanico;
+	@ManyToOne private Mecanico mecanico;
 
-	@ManyToOne
-	private Factura factura;
+	@ManyToOne private Factura factura;
 
-	@OneToMany(mappedBy = "averia")
-	private Set<Intervencion> intervenciones = new HashSet<>();
+	@OneToMany(mappedBy = "averia") private Set<Intervencion> intervenciones = new HashSet<>();
 
 	/**
 	 * Default empty constructor. JPA.
@@ -179,7 +171,7 @@ public class Averia {
 			// la averia pasa a ABIERTA
 			this.setStatus( AveriaStatus.ABIERTA );
 		}
-	
+
 	}
 
 	/**
@@ -216,11 +208,10 @@ public class Averia {
 		if (this.status.equals( AveriaStatus.FACTURADA )) {
 			this.setStatus( AveriaStatus.TERMINADA );
 		}
-	
+
 	}
 
-	@Override
-	public boolean equals( Object obj ) {
+	@Override public boolean equals( Object obj ) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -236,16 +227,14 @@ public class Averia {
 		return true;
 	}
 
-	@Override
-	public int hashCode() {
+	@Override public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ( ( fecha == null ) ? 0 : fecha.hashCode() );
 		return result;
 	}
 
-	@Override
-	public String toString() {
+	@Override public String toString() {
 		return "Averia [descripcion=" + descripcion + ", fecha=" + fecha + ", importe=" + importe
 				+ ", status=" + status
 				+ ", vehiculo=" + vehiculo + "]";
@@ -294,7 +283,7 @@ public class Averia {
 			acum += intervencion.getImporte();
 		}
 		this.importe = acum;
-	
+
 	}
 
 }

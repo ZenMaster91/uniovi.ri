@@ -2,8 +2,7 @@ package uo.ri.model;
 
 import javax.persistence.Entity;
 
-@Entity
-public class Metalico extends MedioPago {
+@Entity public class Metalico extends MedioPago {
 
 	/**
 	 * Allocates a cash object and initializes it.

@@ -26,8 +26,7 @@ public class SustitucionTest {
 	private TipoVehiculo tipoVehiculo;
 	private Cliente cliente;
 
-	@Before
-	public void setUp() {
+	@Before public void setUp() {
 		cliente = new Cliente( "dni-cliente", "nombre", "apellidos" );
 		vehiculo = new Vehiculo( "1234 GJI", "ibiza", "seat" );
 		Association.Poseer.link( cliente, vehiculo );
@@ -46,8 +45,7 @@ public class SustitucionTest {
 		sustitucion.setCantidad( 2 );
 	}
 
-	@Test
-	public void testImporteSustitucion() {
+	@Test public void testImporteSustitucion() {
 		assertTrue( sustitucion.getImporte() == 200.0 );
 	}
 

@@ -24,8 +24,7 @@ public class IntervenirTest {
 	private TipoVehiculo tipoVehiculo;
 	private Cliente cliente;
 
-	@Before
-	public void setUp() throws BusinessException {
+	@Before public void setUp() throws BusinessException {
 		cliente = new Cliente( "dni-cliente", "nombre", "apellidos" );
 		vehiculo = new Vehiculo( "1234 GJI", "seat", "ibiza" );
 		Association.Poseer.link( cliente, vehiculo );
@@ -41,14 +40,12 @@ public class IntervenirTest {
 		intervencion.setMinutos( 60 );
 	}
 
-	@Test
-	public void testArreglarAdd() throws BusinessException {
+	@Test public void testArreglarAdd() throws BusinessException {
 		assertTrue( averia.getIntervenciones().contains( intervencion ) );
 		assertTrue( intervencion.getAveria() == averia );
 	}
 
-	@Test
-	public void testArreglarRemove() throws BusinessException {
+	@Test public void testArreglarRemove() throws BusinessException {
 		Association.Intervenir.unlink( intervencion );
 
 		assertTrue( !averia.getIntervenciones().contains( intervencion ) );
@@ -56,14 +53,12 @@ public class IntervenirTest {
 		assertTrue( intervencion.getAveria() == null );
 	}
 
-	@Test
-	public void testTrabajarAdd() throws BusinessException {
+	@Test public void testTrabajarAdd() throws BusinessException {
 		assertTrue( mecanico.getIntervenciones().contains( intervencion ) );
 		assertTrue( intervencion.getMecanico() == mecanico );
 	}
 
-	@Test
-	public void testTrabajarRemove() throws BusinessException {
+	@Test public void testTrabajarRemove() throws BusinessException {
 		Association.Intervenir.unlink( intervencion );
 
 		assertTrue( !mecanico.getIntervenciones().contains( intervencion ) );
@@ -71,8 +66,7 @@ public class IntervenirTest {
 		assertTrue( intervencion.getMecanico() == null );
 	}
 
-	@Test
-	public void testSafeReturnMecanico() throws BusinessException {
+	@Test public void testSafeReturnMecanico() throws BusinessException {
 		Set<Intervencion> intervenciones = mecanico.getIntervenciones();
 		intervenciones.remove( intervencion );
 
@@ -81,8 +75,7 @@ public class IntervenirTest {
 				mecanico.getIntervenciones().size() == 1 );
 	}
 
-	@Test
-	public void testSafeReturnRepuesto() throws BusinessException {
+	@Test public void testSafeReturnRepuesto() throws BusinessException {
 		Set<Intervencion> intervenciones = averia.getIntervenciones();
 		intervenciones.remove( intervencion );
 

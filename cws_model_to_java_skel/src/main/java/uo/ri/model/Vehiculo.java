@@ -11,27 +11,20 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-@Entity
-public class Vehiculo {
+@Entity public class Vehiculo {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
 	private String marca;
 
-	@Column(unique = true)
-	private String matricula;
+	@Column(unique = true) private String matricula;
 	private String modelo;
 	private int numAverias = 0;
 
-	@ManyToOne
-	private Cliente cliente;
+	@ManyToOne private Cliente cliente;
 
-	@ManyToOne
-	private TipoVehiculo tipoVehiculo;
+	@ManyToOne private TipoVehiculo tipoVehiculo;
 
-	@OneToMany(mappedBy = "vehiculo")
-	private Set<Averia> averias = new HashSet<>();
+	@OneToMany(mappedBy = "vehiculo") private Set<Averia> averias = new HashSet<>();
 
 	/**
 	 * Allocates a vehicle object and initializes it.
@@ -170,16 +163,14 @@ public class Vehiculo {
 		return averias;
 	}
 
-	@Override
-	public int hashCode() {
+	@Override public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ( ( matricula == null ) ? 0 : matricula.hashCode() );
 		return result;
 	}
 
-	@Override
-	public boolean equals( Object obj ) {
+	@Override public boolean equals( Object obj ) {
 		if (this == obj)
 			return true;
 		if (obj == null)

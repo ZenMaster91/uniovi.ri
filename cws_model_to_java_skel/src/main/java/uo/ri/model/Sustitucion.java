@@ -5,17 +5,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
-@Entity
+@Entity @Table(uniqueConstraints = {
+		@UniqueConstraint(columnNames = "REPUESTO_ID, INTERVENCION_ID") })
 public class Sustitucion {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) private long id;
 
-	@ManyToOne
-	private Repuesto repuesto;
-	@ManyToOne
-	private Intervencion intervencion;
+	@ManyToOne private Repuesto repuesto;
+	@ManyToOne private Intervencion intervencion;
 	private int cantidad;
 
 	/**
@@ -96,8 +96,7 @@ public class Sustitucion {
 		this.intervencion = intervencion;
 	}
 
-	@Override
-	public int hashCode() {
+	@Override public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ( ( intervencion == null ) ? 0 : intervencion.hashCode() );
@@ -105,8 +104,7 @@ public class Sustitucion {
 		return result;
 	}
 
-	@Override
-	public boolean equals( Object obj ) {
+	@Override public boolean equals( Object obj ) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -127,8 +125,7 @@ public class Sustitucion {
 		return true;
 	}
 
-	@Override
-	public String toString() {
+	@Override public String toString() {
 		return "Sustitucion [repuesto=" + repuesto + ", intervencion=" + intervencion
 				+ ", cantidad=" + cantidad + "]";
 	}

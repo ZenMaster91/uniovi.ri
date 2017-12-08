@@ -28,8 +28,7 @@ public class SustituirTest {
 	private TipoVehiculo tipoVehiculo;
 	private Cliente cliente;
 
-	@Before
-	public void setUp() throws BusinessException {
+	@Before public void setUp() throws BusinessException {
 		cliente = new Cliente( "dni-cliente", "nombre", "apellidos" );
 		vehiculo = new Vehiculo( "1234 GJI", "seat", "ibiza" );
 		Association.Poseer.link( cliente, vehiculo );
@@ -49,8 +48,7 @@ public class SustituirTest {
 		sustitucion.setCantidad( 2 );
 	}
 
-	@Test
-	public void testSustituirAdd() throws BusinessException {
+	@Test public void testSustituirAdd() throws BusinessException {
 		assertTrue( sustitucion.getIntervencion().equals( intervencion ) );
 		assertTrue( sustitucion.getRepuesto().equals( repuesto ) );
 
@@ -58,8 +56,7 @@ public class SustituirTest {
 		assertTrue( intervencion.getSustituciones().contains( sustitucion ) );
 	}
 
-	@Test
-	public void testSustituirRemove() throws BusinessException {
+	@Test public void testSustituirRemove() throws BusinessException {
 		Association.Sustituir.unlink( sustitucion );
 
 		assertTrue( sustitucion.getIntervencion() == null );
@@ -72,8 +69,7 @@ public class SustituirTest {
 		assertTrue( intervencion.getSustituciones().size() == 0 );
 	}
 
-	@Test
-	public void testSafeReturnIntervencion() throws BusinessException {
+	@Test public void testSafeReturnIntervencion() throws BusinessException {
 		Set<Sustitucion> sustituciones = intervencion.getSustituciones();
 		sustituciones.remove( sustitucion );
 
@@ -82,8 +78,7 @@ public class SustituirTest {
 				intervencion.getSustituciones().size() == 1 );
 	}
 
-	@Test
-	public void testSafeReturnRepuesto() throws BusinessException {
+	@Test public void testSafeReturnRepuesto() throws BusinessException {
 		Set<Sustitucion> sustituciones = repuesto.getSustituciones();
 		sustituciones.remove( sustitucion );
 

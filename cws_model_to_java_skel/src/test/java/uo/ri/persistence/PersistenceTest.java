@@ -44,21 +44,18 @@ public class PersistenceTest {
 	private Sustitucion sustitucion;
 	private Cargo cargo;
 
-	@Before
-	public void setUp() throws BusinessException {
+	@Before public void setUp() throws BusinessException {
 		factory = Persistence.createEntityManagerFactory( "carworkshop" );
 		List<Object> graph = createGraph();
 		persistGraph( graph );
 	}
 
-	@After
-	public void tearDown() {
+	@After public void tearDown() {
 		removeGraph();
 		factory.close();
 	}
 
-	@Test
-	public void testCliente() {
+	@Test public void testCliente() {
 		EntityManager mapper = factory.createEntityManager();
 		EntityTransaction trx = mapper.getTransaction();
 		trx.begin();
@@ -74,8 +71,7 @@ public class PersistenceTest {
 		mapper.close();
 	}
 
-	@Test
-	public void testVehiculos() {
+	@Test public void testVehiculos() {
 		EntityManager mapper = factory.createEntityManager();
 		EntityTransaction trx = mapper.getTransaction();
 		trx.begin();
@@ -95,8 +91,7 @@ public class PersistenceTest {
 		mapper.close();
 	}
 
-	@Test
-	public void testSustituir() {
+	@Test public void testSustituir() {
 		EntityManager mapper = factory.createEntityManager();
 		EntityTransaction trx = mapper.getTransaction();
 		trx.begin();
@@ -112,8 +107,7 @@ public class PersistenceTest {
 		mapper.close();
 	}
 
-	@Test
-	public void testTrabajarArreglar() {
+	@Test public void testTrabajarArreglar() {
 		EntityManager mapper = factory.createEntityManager();
 		EntityTransaction trx = mapper.getTransaction();
 		trx.begin();
@@ -130,8 +124,7 @@ public class PersistenceTest {
 		mapper.close();
 	}
 
-	@Test
-	public void testTener() {
+	@Test public void testTener() {
 		EntityManager mapper = factory.createEntityManager();
 		EntityTransaction trx = mapper.getTransaction();
 		trx.begin();
@@ -146,8 +139,7 @@ public class PersistenceTest {
 		mapper.close();
 	}
 
-	@Test
-	public void testSerPoseer() {
+	@Test public void testSerPoseer() {
 		EntityManager mapper = factory.createEntityManager();
 		EntityTransaction trx = mapper.getTransaction();
 		trx.begin();
@@ -164,8 +156,7 @@ public class PersistenceTest {
 		mapper.close();
 	}
 
-	@Test
-	public void testCargar() {
+	@Test public void testCargar() {
 		EntityManager mapper = factory.createEntityManager();
 		EntityTransaction trx = mapper.getTransaction();
 		trx.begin();
@@ -181,8 +172,7 @@ public class PersistenceTest {
 		mapper.close();
 	}
 
-	@Test
-	public void testFacturar() {
+	@Test public void testFacturar() {
 		EntityManager mapper = factory.createEntityManager();
 		EntityTransaction trx = mapper.getTransaction();
 		trx.begin();
@@ -197,8 +187,7 @@ public class PersistenceTest {
 		mapper.close();
 	}
 
-	@Test
-	public void testPagar() {
+	@Test public void testPagar() {
 		EntityManager mapper = factory.createEntityManager();
 		EntityTransaction trx = mapper.getTransaction();
 		trx.begin();

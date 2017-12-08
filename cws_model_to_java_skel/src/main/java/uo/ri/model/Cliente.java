@@ -12,24 +12,18 @@ import javax.persistence.OneToMany;
 
 import uo.ri.model.types.Address;
 
-@Entity
-public class Cliente {
+@Entity public class Cliente {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
 
-	@Column(unique = true)
-	private String dni;
+	@Column(unique = true) private String dni;
 	private String nombre;
 	private String apellidos;
 	private Address address;
 
-	@OneToMany(mappedBy = "cliente")
-	private Set<Vehiculo> vehiculos = new HashSet<>();
+	@OneToMany(mappedBy = "cliente") private Set<Vehiculo> vehiculos = new HashSet<>();
 
-	@OneToMany(mappedBy = "cliente")
-	private Set<MedioPago> mediosDePago = new HashSet<>();
+	@OneToMany(mappedBy = "cliente") private Set<MedioPago> mediosDePago = new HashSet<>();
 
 	/**
 	 * Allocates a client object and initializes it so that it represents a
@@ -152,16 +146,14 @@ public class Cliente {
 		return mediosDePago;
 	}
 
-	@Override
-	public int hashCode() {
+	@Override public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ( ( dni == null ) ? 0 : dni.hashCode() );
 		return result;
 	}
 
-	@Override
-	public boolean equals( Object obj ) {
+	@Override public boolean equals( Object obj ) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -177,8 +169,7 @@ public class Cliente {
 		return true;
 	}
 
-	@Override
-	public String toString() {
+	@Override public String toString() {
 		return "Cliente [dni=" + dni + ", nombre=" + nombre + ", apellidos=" + apellidos
 				+ ", address=" + address + "]";
 	}

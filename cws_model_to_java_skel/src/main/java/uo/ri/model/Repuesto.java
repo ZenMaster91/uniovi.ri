@@ -9,19 +9,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-@Entity
-public class Repuesto {
+@Entity public class Repuesto {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) private long id;
 
 	private String codigo;
 	private String descripcion;
 	private double precio;
 
-	@OneToMany(mappedBy = "repuesto")
-	private Set<Sustitucion> sustituciones = new HashSet<>();
+	@OneToMany(mappedBy = "repuesto") private Set<Sustitucion> sustituciones = new HashSet<>();
 
 	/**
 	 * Allocates a replacement object and initializes it so that it represents.
@@ -31,7 +27,7 @@ public class Repuesto {
 	/**
 	 * Allocates a replacement object and initializes it so that it represents.
 	 * 
-	 * @param codigo is the code of the 
+	 * @param codigo is the code of the
 	 */
 	public Repuesto( String codigo ) {
 		super();
@@ -111,16 +107,14 @@ public class Repuesto {
 		return sustituciones;
 	}
 
-	@Override
-	public int hashCode() {
+	@Override public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ( ( codigo == null ) ? 0 : codigo.hashCode() );
 		return result;
 	}
 
-	@Override
-	public boolean equals( Object obj ) {
+	@Override public boolean equals( Object obj ) {
 		if (this == obj)
 			return true;
 		if (obj == null)

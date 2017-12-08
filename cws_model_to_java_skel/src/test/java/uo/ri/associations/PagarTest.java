@@ -33,8 +33,7 @@ public class PagarTest {
 	private Metalico metalico;
 	private Cargo cargo;
 
-	@Before
-	public void setUp() throws BusinessException {
+	@Before public void setUp() throws BusinessException {
 		cliente = new Cliente( "dni-cliente", "nombre", "apellidos" );
 		vehiculo = new Vehiculo( "1234 GJI", "seat", "ibiza" );
 		Association.Poseer.link( cliente, vehiculo );
@@ -62,14 +61,12 @@ public class PagarTest {
 		cargo = new Cargo( factura, metalico, 100.0 );
 	}
 
-	@Test
-	public void testPagarAdd() throws BusinessException {
+	@Test public void testPagarAdd() throws BusinessException {
 		assertTrue( cliente.getMediosPago().contains( metalico ) );
 		assertTrue( metalico.getCliente() == cliente );
 	}
 
-	@Test
-	public void testPagarRemove() throws BusinessException {
+	@Test public void testPagarRemove() throws BusinessException {
 		Association.Pagar.unlink( cliente, metalico );
 
 		assertTrue( !cliente.getMediosPago().contains( metalico ) );
@@ -77,8 +74,7 @@ public class PagarTest {
 		assertTrue( metalico.getCliente() == null );
 	}
 
-	@Test
-	public void testCargarAdd() throws BusinessException {
+	@Test public void testCargarAdd() throws BusinessException {
 		assertTrue( metalico.getCargos().contains( cargo ) );
 		assertTrue( factura.getCargos().contains( cargo ) );
 
@@ -88,8 +84,7 @@ public class PagarTest {
 		assertTrue( metalico.getAcumulado() == 100.0 );
 	}
 
-	@Test
-	public void testCargarRemove() throws BusinessException {
+	@Test public void testCargarRemove() throws BusinessException {
 		cargo.rewind();
 
 		assertTrue( !metalico.getCargos().contains( cargo ) );

@@ -16,29 +16,25 @@ public class ClasificarTest {
 	private Vehiculo vehiculo;
 	private TipoVehiculo tipoVehiculo;
 
-	@Before
-	public void setUp() throws BusinessException {
+	@Before public void setUp() throws BusinessException {
 		vehiculo = new Vehiculo( "1234 GJI", "seat", "ibiza" );
 		tipoVehiculo = new TipoVehiculo( "coche", 50.0 );
 		Association.Clasificar.link( tipoVehiculo, vehiculo );
 	}
 
-	@Test
-	public void testClasificarLinked() throws BusinessException {
+	@Test public void testClasificarLinked() throws BusinessException {
 		assertTrue( tipoVehiculo.getVehiculos().contains( vehiculo ) );
 		assertTrue( vehiculo.getTipo() == tipoVehiculo );
 	}
 
-	@Test
-	public void testClasificarUnlink() throws BusinessException {
+	@Test public void testClasificarUnlink() throws BusinessException {
 		Association.Clasificar.unlink( tipoVehiculo, vehiculo );
 
 		assertTrue( !tipoVehiculo.getVehiculos().contains( vehiculo ) );
 		assertTrue( vehiculo.getTipo() == null );
 	}
 
-	@Test
-	public void testSafeReturn() throws BusinessException {
+	@Test public void testSafeReturn() throws BusinessException {
 		Set<Vehiculo> vehiculos = tipoVehiculo.getVehiculos();
 		vehiculos.remove( vehiculo );
 

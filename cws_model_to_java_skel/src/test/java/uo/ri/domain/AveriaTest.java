@@ -32,8 +32,7 @@ public class AveriaTest {
 	private TipoVehiculo tipoVehiculo;
 	private Cliente cliente;
 
-	@Before
-	public void setUp() throws BusinessException {
+	@Before public void setUp() throws BusinessException {
 		cliente = new Cliente( "dni-cliente", "nombre", "apellidos" );
 		vehiculo = new Vehiculo( "1234 GJI", "ibiza", "seat" );
 		Association.Poseer.link( cliente, vehiculo );
@@ -58,16 +57,14 @@ public class AveriaTest {
 	/**
 	 * El importe de la averia de referencia es 250.0
 	 */
-	@Test
-	public void testImporteAveria() {
+	@Test public void testImporteAveria() {
 		assertTrue( averia.getImporte() == 250.0 );
 	}
 
 	/**
 	 * Calculo del importe de averia con intervenciones de varios mecanicos
 	 */
-	@Test
-	public void testImporteAveriaConDosIntervenciones() throws BusinessException {
+	@Test public void testImporteAveriaConDosIntervenciones() throws BusinessException {
 		averia.reopen();
 		Mecanico otro = new Mecanico( "1", "a", "n" );
 		averia.assignTo( otro );
@@ -85,8 +82,7 @@ public class AveriaTest {
 	 * 
 	 * @throws BusinessException
 	 */
-	@Test
-	public void testImporteAveriaQuitandoIntervencione() throws BusinessException {
+	@Test public void testImporteAveriaQuitandoIntervencione() throws BusinessException {
 		averia.reopen();
 		Mecanico otro = new Mecanico( "1", "a", "n" );
 		averia.assignTo( otro );
@@ -104,8 +100,8 @@ public class AveriaTest {
 	 * 
 	 * @throws BusinessException
 	 */
-	@Test(expected = BusinessException.class)
-	public void testAveriaNoTerminadaException() throws BusinessException {
+	@Test(expected = BusinessException.class) public void testAveriaNoTerminadaException()
+			throws BusinessException {
 		averia.reopen();
 		List<Averia> averias = new ArrayList<Averia>();
 		averias.add( averia );
@@ -118,8 +114,7 @@ public class AveriaTest {
 	 * 
 	 * @throws BusinessException
 	 */
-	@Test
-	public void testFacturaCreadaSinAbonar() throws BusinessException {
+	@Test public void testFacturaCreadaSinAbonar() throws BusinessException {
 		List<Averia> averias = new ArrayList<Averia>();
 		averias.add( averia );
 		Factura factura = new Factura( 0L, averias );

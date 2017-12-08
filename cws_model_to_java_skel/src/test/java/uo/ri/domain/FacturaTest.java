@@ -36,8 +36,7 @@ public class FacturaTest {
 	private TipoVehiculo tipoVehiculo;
 	private Cliente cliente;
 
-	@Before
-	public void setUp() throws BusinessException {
+	@Before public void setUp() throws BusinessException {
 		cliente = new Cliente( "dni-cliente", "nombre", "apellidos" );
 		vehiculo = new Vehiculo( "1234 GJI", "ibiza", "seat" );
 		Association.Poseer.link( cliente, vehiculo );
@@ -65,8 +64,7 @@ public class FacturaTest {
 	 * 
 	 * @throws BusinessException
 	 */
-	@Test
-	public void testImporteFactura() throws BusinessException {
+	@Test public void testImporteFactura() throws BusinessException {
 		List<Averia> averias = new ArrayList<>();
 		averias.add( averia );
 		Factura factura = new Factura( 0L, averias );
@@ -80,8 +78,7 @@ public class FacturaTest {
 	 * 
 	 * @throws BusinessException
 	 */
-	@Test
-	public void testImporteFacturaAddAveria() throws BusinessException {
+	@Test public void testImporteFacturaAddAveria() throws BusinessException {
 		Factura factura = new Factura( 0L ); // 0L es el numero de factura
 		factura.addAveria( averia );
 
@@ -93,8 +90,7 @@ public class FacturaTest {
 	 * 
 	 * @throws BusinessException
 	 */
-	@Test
-	public void testImporteFacturadDosAverias() throws BusinessException {
+	@Test public void testImporteFacturadDosAverias() throws BusinessException {
 		List<Averia> averias = new ArrayList<Averia>();
 		averias.add( averia );
 		averias.add( crearOtraAveria() );
@@ -109,8 +105,7 @@ public class FacturaTest {
 	 * 
 	 * @throws BusinessException
 	 */
-	@Test
-	public void testImporteFacturaAddDosAverias() throws BusinessException {
+	@Test public void testImporteFacturaAddDosAverias() throws BusinessException {
 		Factura factura = new Factura( 0L );
 		factura.addAveria( averia );
 		factura.addAveria( crearOtraAveria() );
@@ -123,8 +118,7 @@ public class FacturaTest {
 	 * 
 	 * @throws BusinessException
 	 */
-	@Test
-	public void testFacturaCreadaSinAbonar() throws BusinessException {
+	@Test public void testFacturaCreadaSinAbonar() throws BusinessException {
 		List<Averia> averias = new ArrayList<Averia>();
 		averias.add( averia );
 		Factura factura = new Factura( 0L, averias );
@@ -138,8 +132,7 @@ public class FacturaTest {
 	 * 
 	 * @throws BusinessException
 	 */
-	@Test
-	public void testImporteFacturaAntesDeJulio() throws BusinessException {
+	@Test public void testImporteFacturaAntesDeJulio() throws BusinessException {
 		Date JUNE_6_2012 = DateUtil.fromString( "15/6/2012" );
 
 		List<Averia> averias = new ArrayList<Averia>();
@@ -155,8 +148,7 @@ public class FacturaTest {
 	 * 
 	 * @throws BusinessException
 	 */
-	@Test
-	public void testAveriasFacturadas() throws BusinessException {
+	@Test public void testAveriasFacturadas() throws BusinessException {
 		List<Averia> averias = Arrays.asList( averia );
 		new Factura( 0L, averias );
 
@@ -169,8 +161,7 @@ public class FacturaTest {
 	 * 
 	 * @throws BusinessException
 	 */
-	@Test
-	public void testAveriasFacturadasAddAveria() throws BusinessException {
+	@Test public void testAveriasFacturadasAddAveria() throws BusinessException {
 		new Factura( 0L ).addAveria( averia );
 
 		assertTrue( averia.getStatus() == AveriaStatus.FACTURADA );
@@ -181,8 +172,7 @@ public class FacturaTest {
 	 * 
 	 * @throws BusinessException
 	 */
-	@Test
-	public void testDosAveriasFacturadasAddAveria() throws BusinessException {
+	@Test public void testDosAveriasFacturadasAddAveria() throws BusinessException {
 		Averia otraAveria = crearOtraAveria();
 
 		Factura f = new Factura( 0L );

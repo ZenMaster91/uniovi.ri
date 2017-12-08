@@ -2,8 +2,7 @@ package uo.ri.model.types;
 
 import javax.persistence.Embeddable;
 
-@Embeddable
-public class Address {
+@Embeddable public class Address {
 
 	private String street, city, zipcode;
 
@@ -47,8 +46,7 @@ public class Address {
 		return zipcode;
 	}
 
-	@Override
-	public int hashCode() {
+	@Override public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ( ( city == null ) ? 0 : city.hashCode() );
@@ -57,8 +55,7 @@ public class Address {
 		return result;
 	}
 
-	@Override
-	public boolean equals( Object obj ) {
+	@Override public boolean equals( Object obj ) {
 		if (this == obj)
 			return true;
 		if (obj == null)

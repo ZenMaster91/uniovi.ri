@@ -19,22 +19,17 @@ import uo.ri.model.exception.BusinessException;
 import uo.ri.model.types.AveriaStatus;
 import uo.ri.model.types.FacturaStatus;
 
-@Entity
-public class Factura {
+@Entity public class Factura {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
 	private Long numero;
 	private Calendar fecha = Calendar.getInstance();
 	private double importe;
 	private FacturaStatus facturaStatus = FacturaStatus.SIN_ABONAR;
 
-	@OneToMany(mappedBy = "factura")
-	private Set<Averia> averias = new HashSet<>();
+	@OneToMany(mappedBy = "factura") private Set<Averia> averias = new HashSet<>();
 
-	@OneToMany(mappedBy = "factura")
-	private Set<Cargo> cargos = new HashSet<>();
+	@OneToMany(mappedBy = "factura") private Set<Cargo> cargos = new HashSet<>();
 
 	/**
 	 * Allocates a invoice object and initializes it so that it represents an
@@ -178,7 +173,8 @@ public class Factura {
 	}
 
 	/**
-	 * @return a copy of the original set of faults that will be charged in the invoice.
+	 * @return a copy of the original set of faults that will be charged in the
+	 *         invoice.
 	 */
 	public Set<Averia> getAverias() {
 		return new HashSet<>( averias );
@@ -218,7 +214,7 @@ public class Factura {
 			averia.markBackToFinished();
 			importe = 0;
 		}
-	
+
 	}
 
 	/**
