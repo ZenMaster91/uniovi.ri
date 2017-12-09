@@ -12,11 +12,9 @@ import javax.persistence.OneToMany;
 @Entity public class Repuesto {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) private long id;
-
 	private String codigo;
 	private String descripcion;
 	private double precio;
-
 	@OneToMany(mappedBy = "repuesto") private Set<Sustitucion> sustituciones = new HashSet<>();
 
 	/**

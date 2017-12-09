@@ -15,15 +15,11 @@ import javax.persistence.OneToMany;
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
 	private String marca;
-
 	@Column(unique = true) private String matricula;
 	private String modelo;
 	private int numAverias = 0;
-
 	@ManyToOne private Cliente cliente;
-
 	@ManyToOne private TipoVehiculo tipoVehiculo;
-
 	@OneToMany(mappedBy = "vehiculo") private Set<Averia> averias = new HashSet<>();
 
 	/**

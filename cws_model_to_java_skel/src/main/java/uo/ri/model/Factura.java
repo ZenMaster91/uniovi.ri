@@ -26,9 +26,7 @@ import uo.ri.model.types.FacturaStatus;
 	private Calendar fecha = Calendar.getInstance();
 	private double importe;
 	private FacturaStatus facturaStatus = FacturaStatus.SIN_ABONAR;
-
 	@OneToMany(mappedBy = "factura") private Set<Averia> averias = new HashSet<>();
-
 	@OneToMany(mappedBy = "factura") private Set<Cargo> cargos = new HashSet<>();
 
 	/**

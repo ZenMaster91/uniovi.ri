@@ -13,9 +13,8 @@ import javax.persistence.OneToMany;
 @Entity public class TipoVehiculo {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
-	@Column(unique=true) private String nombre;
+	@Column(unique = true) private String nombre;
 	private double precioHora;
-
 	@OneToMany(mappedBy = "tipoVehiculo") private Set<Vehiculo> vehiculos = new HashSet<>();
 
 	/**

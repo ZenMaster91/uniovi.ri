@@ -15,9 +15,7 @@ import javax.persistence.OneToMany;
 @Entity @Inheritance(strategy = InheritanceType.JOINED) public abstract class MedioPago {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) private long id;
-
 	protected double acumulado = 0.0;
-
 	@ManyToOne private Cliente cliente;
 	@OneToMany(mappedBy = "medioPago") private Set<Cargo> cargos = new HashSet<>();
 

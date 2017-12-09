@@ -16,12 +16,9 @@ import javax.persistence.UniqueConstraint;
 		@UniqueConstraint(columnNames = "AVERIA_ID, MECANICO_ID") }) public class Intervencion {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
-
 	@ManyToOne private Averia averia;
-
 	@ManyToOne private Mecanico mecanico;
 	private int minutos;
-
 	@OneToMany(mappedBy = "intervencion") private Set<Sustitucion> sustituciones = new HashSet<>();
 
 	/**

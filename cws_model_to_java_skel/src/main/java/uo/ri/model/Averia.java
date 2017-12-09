@@ -23,16 +23,14 @@ import uo.ri.model.types.AveriaStatus;
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
 	private String descripcion;
 	private Date fecha;
-	private double importe = 0.0;
+	private Double importe = 0.0;
 	private AveriaStatus status = AveriaStatus.ABIERTA;
-
 	@ManyToOne private Vehiculo vehiculo;
-
 	@ManyToOne private Mecanico mecanico;
-
 	@ManyToOne private Factura factura;
-
 	@OneToMany(mappedBy = "averia") private Set<Intervencion> intervenciones = new HashSet<>();
+
+	// ---- END OF FIELDS ----
 
 	/**
 	 * Default empty constructor. JPA.
@@ -59,6 +57,8 @@ import uo.ri.model.types.AveriaStatus;
 		this( vehiculo );
 		this.descripcion = descripcion;
 	}
+
+	// ---- END OF CONSTRUCTORS ----
 
 	/**
 	 * @return the unique id of the object.
@@ -166,9 +166,7 @@ import uo.ri.model.types.AveriaStatus;
 	 * Reopens the fault.
 	 */
 	public void reopen() {
-		// Solo se puede reabrir una averia que está TERMINADA
 		if (this.status.equals( AveriaStatus.TERMINADA )) {
-			// la averia pasa a ABIERTA
 			this.setStatus( AveriaStatus.ABIERTA );
 		}
 
@@ -240,6 +238,8 @@ import uo.ri.model.types.AveriaStatus;
 				+ ", vehiculo=" + vehiculo + "]";
 	}
 
+	// ---- END OF PUBLIC METHODS ----
+
 	/**
 	 * @return the actions performed as a set of interventions.
 	 */
@@ -273,6 +273,8 @@ import uo.ri.model.types.AveriaStatus;
 	void _setVehiculo( Vehiculo vehiculo ) {
 		this.vehiculo = vehiculo;
 	}
+
+	// ---- END OF PROTECTED METHODS ----
 
 	/**
 	 * Calculates the amount produced by the fault.

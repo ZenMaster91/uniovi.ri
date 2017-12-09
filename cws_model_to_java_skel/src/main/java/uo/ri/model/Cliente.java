@@ -15,14 +15,11 @@ import uo.ri.model.types.Address;
 @Entity public class Cliente {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
-
 	@Column(unique = true) private String dni;
 	private String nombre;
 	private String apellidos;
 	private Address address;
-
 	@OneToMany(mappedBy = "cliente") private Set<Vehiculo> vehiculos = new HashSet<>();
-
 	@OneToMany(mappedBy = "cliente") private Set<MedioPago> mediosDePago = new HashSet<>();
 
 	/**
