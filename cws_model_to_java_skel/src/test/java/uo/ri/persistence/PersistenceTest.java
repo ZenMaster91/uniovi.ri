@@ -34,8 +34,8 @@ import uo.ri.model.Sustitucion;
 import uo.ri.model.TarjetaCredito;
 import uo.ri.model.TipoVehiculo;
 import uo.ri.model.Vehiculo;
-import uo.ri.model.exception.BusinessException;
 import uo.ri.model.types.Address;
+import uo.ri.util.exception.BusinessException;
 
 public class PersistenceTest {
 
@@ -242,7 +242,12 @@ public class PersistenceTest {
 		factura.setFecha( DateUtil.today() );
 		factura.addAveria( averia );
 
-		cargo = new Cargo( factura, tarjetaCredito, factura.getImporte() );
+		try {
+			cargo = new Cargo( factura, tarjetaCredito, factura.getImporte() );
+		} catch (uo.ri.model.exception.BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		List<Object> res = new LinkedList<Object>();
 

@@ -10,7 +10,7 @@ import uo.ri.model.exception.BusinessException;
 import uo.ri.model.types.FacturaStatus;
 
 @Entity public class Cargo {
-	
+
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) private long id;
 	@ManyToOne private Factura factura;
 	@ManyToOne private MedioPago medioPago;

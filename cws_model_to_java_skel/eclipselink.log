@@ -1,72 +1,72 @@
-[EL Info]: 2017-12-09 01:22:27.256--ServerSession(805536380)--EclipseLink, version: Eclipse Persistence Services - 2.6.4.v20160829-44060b6
-[EL Severe]: ejb: 2017-12-09 01:22:27.425--ServerSession(805536380)--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.6.4.v20160829-44060b6): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLTransientConnectionException: java.net.ConnectException: Connection refused (Connection refused)
-Error Code: -1301
-[EL Info]: 2017-12-09 01:22:27.426--ServerSession(805536380)--EclipseLink, version: Eclipse Persistence Services - 2.6.4.v20160829-44060b6
-[EL Severe]: ejb: 2017-12-09 01:22:27.427--ServerSession(805536380)--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.6.4.v20160829-44060b6): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLTransientConnectionException: java.net.ConnectException: Connection refused (Connection refused)
-Error Code: -1301
-[EL Info]: 2017-12-09 01:22:27.444--ServerSession(805536380)--EclipseLink, version: Eclipse Persistence Services - 2.6.4.v20160829-44060b6
-[EL Severe]: ejb: 2017-12-09 01:22:27.446--ServerSession(805536380)--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.6.4.v20160829-44060b6): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLTransientConnectionException: java.net.ConnectException: Connection refused (Connection refused)
-Error Code: -1301
-[EL Info]: 2017-12-09 01:22:27.447--ServerSession(805536380)--EclipseLink, version: Eclipse Persistence Services - 2.6.4.v20160829-44060b6
-[EL Severe]: ejb: 2017-12-09 01:22:27.449--ServerSession(805536380)--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.6.4.v20160829-44060b6): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLTransientConnectionException: java.net.ConnectException: Connection refused (Connection refused)
-Error Code: -1301
-[EL Info]: 2017-12-09 01:22:27.461--ServerSession(805536380)--EclipseLink, version: Eclipse Persistence Services - 2.6.4.v20160829-44060b6
-[EL Severe]: ejb: 2017-12-09 01:22:27.463--ServerSession(805536380)--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.6.4.v20160829-44060b6): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLTransientConnectionException: java.net.ConnectException: Connection refused (Connection refused)
-Error Code: -1301
-[EL Info]: 2017-12-09 01:22:27.464--ServerSession(805536380)--EclipseLink, version: Eclipse Persistence Services - 2.6.4.v20160829-44060b6
-[EL Severe]: ejb: 2017-12-09 01:22:27.465--ServerSession(805536380)--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.6.4.v20160829-44060b6): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLTransientConnectionException: java.net.ConnectException: Connection refused (Connection refused)
-Error Code: -1301
-[EL Info]: 2017-12-09 01:22:27.48--ServerSession(805536380)--EclipseLink, version: Eclipse Persistence Services - 2.6.4.v20160829-44060b6
-[EL Severe]: ejb: 2017-12-09 01:22:27.483--ServerSession(805536380)--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.6.4.v20160829-44060b6): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLTransientConnectionException: java.net.ConnectException: Connection refused (Connection refused)
-Error Code: -1301
-[EL Info]: 2017-12-09 01:22:27.484--ServerSession(805536380)--EclipseLink, version: Eclipse Persistence Services - 2.6.4.v20160829-44060b6
-[EL Severe]: ejb: 2017-12-09 01:22:27.49--ServerSession(805536380)--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.6.4.v20160829-44060b6): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLTransientConnectionException: java.net.ConnectException: Connection refused (Connection refused)
-Error Code: -1301
-[EL Info]: 2017-12-09 01:22:27.508--ServerSession(805536380)--EclipseLink, version: Eclipse Persistence Services - 2.6.4.v20160829-44060b6
-[EL Severe]: ejb: 2017-12-09 01:22:27.51--ServerSession(805536380)--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.6.4.v20160829-44060b6): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLTransientConnectionException: java.net.ConnectException: Connection refused (Connection refused)
-Error Code: -1301
-[EL Info]: 2017-12-09 01:22:27.511--ServerSession(805536380)--EclipseLink, version: Eclipse Persistence Services - 2.6.4.v20160829-44060b6
-[EL Severe]: ejb: 2017-12-09 01:22:27.513--ServerSession(805536380)--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.6.4.v20160829-44060b6): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLTransientConnectionException: java.net.ConnectException: Connection refused (Connection refused)
-Error Code: -1301
-[EL Info]: 2017-12-09 01:22:27.526--ServerSession(805536380)--EclipseLink, version: Eclipse Persistence Services - 2.6.4.v20160829-44060b6
-[EL Severe]: ejb: 2017-12-09 01:22:27.529--ServerSession(805536380)--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.6.4.v20160829-44060b6): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLTransientConnectionException: java.net.ConnectException: Connection refused (Connection refused)
-Error Code: -1301
-[EL Info]: 2017-12-09 01:22:27.53--ServerSession(805536380)--EclipseLink, version: Eclipse Persistence Services - 2.6.4.v20160829-44060b6
-[EL Severe]: ejb: 2017-12-09 01:22:27.532--ServerSession(805536380)--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.6.4.v20160829-44060b6): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLTransientConnectionException: java.net.ConnectException: Connection refused (Connection refused)
-Error Code: -1301
-[EL Info]: 2017-12-09 01:22:27.544--ServerSession(805536380)--EclipseLink, version: Eclipse Persistence Services - 2.6.4.v20160829-44060b6
-[EL Severe]: ejb: 2017-12-09 01:22:27.546--ServerSession(805536380)--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.6.4.v20160829-44060b6): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLTransientConnectionException: java.net.ConnectException: Connection refused (Connection refused)
-Error Code: -1301
-[EL Info]: 2017-12-09 01:22:27.547--ServerSession(805536380)--EclipseLink, version: Eclipse Persistence Services - 2.6.4.v20160829-44060b6
-[EL Severe]: ejb: 2017-12-09 01:22:27.548--ServerSession(805536380)--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.6.4.v20160829-44060b6): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLTransientConnectionException: java.net.ConnectException: Connection refused (Connection refused)
-Error Code: -1301
-[EL Info]: 2017-12-09 01:22:27.562--ServerSession(805536380)--EclipseLink, version: Eclipse Persistence Services - 2.6.4.v20160829-44060b6
-[EL Severe]: ejb: 2017-12-09 01:22:27.563--ServerSession(805536380)--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.6.4.v20160829-44060b6): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLTransientConnectionException: java.net.ConnectException: Connection refused (Connection refused)
-Error Code: -1301
-[EL Info]: 2017-12-09 01:22:27.564--ServerSession(805536380)--EclipseLink, version: Eclipse Persistence Services - 2.6.4.v20160829-44060b6
-[EL Severe]: ejb: 2017-12-09 01:22:27.566--ServerSession(805536380)--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.6.4.v20160829-44060b6): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLTransientConnectionException: java.net.ConnectException: Connection refused (Connection refused)
-Error Code: -1301
-[EL Info]: 2017-12-09 01:22:27.573--ServerSession(805536380)--EclipseLink, version: Eclipse Persistence Services - 2.6.4.v20160829-44060b6
-[EL Severe]: ejb: 2017-12-09 01:22:27.574--ServerSession(805536380)--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.6.4.v20160829-44060b6): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLTransientConnectionException: java.net.ConnectException: Connection refused (Connection refused)
-Error Code: -1301
-[EL Info]: 2017-12-09 01:22:27.574--ServerSession(805536380)--EclipseLink, version: Eclipse Persistence Services - 2.6.4.v20160829-44060b6
-[EL Severe]: ejb: 2017-12-09 01:22:27.576--ServerSession(805536380)--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.6.4.v20160829-44060b6): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLTransientConnectionException: java.net.ConnectException: Connection refused (Connection refused)
-Error Code: -1301
+[EL Info]: 2017-12-11 10:24:57.554--ServerSession(1709930189)--EclipseLink, version: Eclipse Persistence Services - 2.6.4.v20160829-44060b6
+[EL Info]: connection: 2017-12-11 10:24:57.897--ServerSession(1709930189)--/file:/Users/willy/Desktop/GITHUB/uniovi.ri/cws_model_to_java_skel/bin/_carworkshop login successful
+[EL Fine]: sql: 2017-12-11 10:24:57.911--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE CARGO DROP CONSTRAINT FK_CARGO_FACTURA_ID
+[EL Fine]: sql: 2017-12-11 10:24:57.915--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE CARGO DROP CONSTRAINT FK_CARGO_MEDIOPAGO_ID
+[EL Fine]: sql: 2017-12-11 10:24:57.916--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE SUSTITUCION DROP CONSTRAINT FK_SUSTITUCION_INTERVENCION_ID
+[EL Fine]: sql: 2017-12-11 10:24:57.917--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE SUSTITUCION DROP CONSTRAINT FK_SUSTITUCION_REPUESTO_ID
+[EL Fine]: sql: 2017-12-11 10:24:57.917--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE SUSTITUCION DROP CONSTRAINT UNQ_SUSTITUCION_0
+[EL Fine]: sql: 2017-12-11 10:24:57.918--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE MEDIOPAGO DROP CONSTRAINT FK_MEDIOPAGO_CLIENTE_ID
+[EL Fine]: sql: 2017-12-11 10:24:57.919--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE METALICO DROP CONSTRAINT FK_METALICO_ID
+[EL Fine]: sql: 2017-12-11 10:24:57.92--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE TARJETACREDITO DROP CONSTRAINT FK_TARJETACREDITO_ID
+[EL Fine]: sql: 2017-12-11 10:24:57.921--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE INTERVENCION DROP CONSTRAINT FK_INTERVENCION_MECANICO_ID
+[EL Fine]: sql: 2017-12-11 10:24:57.922--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE INTERVENCION DROP CONSTRAINT FK_INTERVENCION_AVERIA_ID
+[EL Fine]: sql: 2017-12-11 10:24:57.923--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE INTERVENCION DROP CONSTRAINT UNQ_INTERVENCION_0
+[EL Fine]: sql: 2017-12-11 10:24:57.924--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE VEHICULO DROP CONSTRAINT FK_VEHICULO_TIPOVEHICULO_ID
+[EL Fine]: sql: 2017-12-11 10:24:57.925--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE VEHICULO DROP CONSTRAINT FK_VEHICULO_CLIENTE_ID
+[EL Fine]: sql: 2017-12-11 10:24:57.926--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE BONO DROP CONSTRAINT FK_BONO_ID
+[EL Fine]: sql: 2017-12-11 10:24:57.927--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE AVERIA DROP CONSTRAINT FK_AVERIA_MECANICO_ID
+[EL Fine]: sql: 2017-12-11 10:24:57.928--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE AVERIA DROP CONSTRAINT FK_AVERIA_VEHICULO_ID
+[EL Fine]: sql: 2017-12-11 10:24:57.929--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE AVERIA DROP CONSTRAINT FK_AVERIA_FACTURA_ID
+[EL Fine]: sql: 2017-12-11 10:24:57.929--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE AVERIA DROP CONSTRAINT UNQ_AVERIA_0
+[EL Fine]: sql: 2017-12-11 10:24:57.931--ServerSession(1709930189)--Connection(1089691218)--DROP TABLE CLIENTE
+[EL Fine]: sql: 2017-12-11 10:24:57.932--ServerSession(1709930189)--Connection(1089691218)--DROP TABLE CARGO
+[EL Fine]: sql: 2017-12-11 10:24:57.933--ServerSession(1709930189)--Connection(1089691218)--DROP TABLE REPUESTO
+[EL Fine]: sql: 2017-12-11 10:24:57.933--ServerSession(1709930189)--Connection(1089691218)--DROP TABLE SUSTITUCION
+[EL Fine]: sql: 2017-12-11 10:24:57.934--ServerSession(1709930189)--Connection(1089691218)--DROP TABLE MEDIOPAGO
+[EL Fine]: sql: 2017-12-11 10:24:57.935--ServerSession(1709930189)--Connection(1089691218)--DROP TABLE METALICO
+[EL Fine]: sql: 2017-12-11 10:24:57.936--ServerSession(1709930189)--Connection(1089691218)--DROP TABLE TARJETACREDITO
+[EL Fine]: sql: 2017-12-11 10:24:57.937--ServerSession(1709930189)--Connection(1089691218)--DROP TABLE MECANICO
+[EL Fine]: sql: 2017-12-11 10:24:57.938--ServerSession(1709930189)--Connection(1089691218)--DROP TABLE TIPOVEHICULO
+[EL Fine]: sql: 2017-12-11 10:24:57.938--ServerSession(1709930189)--Connection(1089691218)--DROP TABLE INTERVENCION
+[EL Fine]: sql: 2017-12-11 10:24:57.939--ServerSession(1709930189)--Connection(1089691218)--DROP TABLE VEHICULO
+[EL Fine]: sql: 2017-12-11 10:24:57.94--ServerSession(1709930189)--Connection(1089691218)--DROP TABLE BONO
+[EL Fine]: sql: 2017-12-11 10:24:57.941--ServerSession(1709930189)--Connection(1089691218)--DROP TABLE AVERIA
+[EL Fine]: sql: 2017-12-11 10:24:57.942--ServerSession(1709930189)--Connection(1089691218)--DROP TABLE FACTURA
+[EL Fine]: sql: 2017-12-11 10:24:57.943--ServerSession(1709930189)--Connection(1089691218)--CREATE TABLE CLIENTE (ID BIGINT GENERATED BY DEFAULT AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL, APELLIDOS VARCHAR(255), DNI VARCHAR(255), NOMBRE VARCHAR(255), CITY VARCHAR(255), STREET VARCHAR(255), ZIPCODE VARCHAR(255), PRIMARY KEY (ID))
+[EL Fine]: sql: 2017-12-11 10:24:57.945--ServerSession(1709930189)--Connection(1089691218)--CREATE TABLE CARGO (ID BIGINT GENERATED BY DEFAULT AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL, IMPORTE REAL, FACTURA_ID BIGINT, MEDIOPAGO_ID BIGINT, PRIMARY KEY (ID))
+[EL Fine]: sql: 2017-12-11 10:24:57.946--ServerSession(1709930189)--Connection(1089691218)--CREATE TABLE REPUESTO (ID BIGINT GENERATED BY DEFAULT AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL, CODIGO VARCHAR(255), DESCRIPCION VARCHAR(255), PRECIO REAL, PRIMARY KEY (ID))
+[EL Fine]: sql: 2017-12-11 10:24:57.947--ServerSession(1709930189)--Connection(1089691218)--CREATE TABLE SUSTITUCION (ID BIGINT GENERATED BY DEFAULT AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL, CANTIDAD INTEGER, INTERVENCION_ID BIGINT, REPUESTO_ID BIGINT, PRIMARY KEY (ID))
+[EL Fine]: sql: 2017-12-11 10:24:57.948--ServerSession(1709930189)--Connection(1089691218)--CREATE TABLE MEDIOPAGO (ID BIGINT GENERATED BY DEFAULT AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL, DTYPE VARCHAR(31), ACUMULADO REAL, CLIENTE_ID BIGINT, PRIMARY KEY (ID))
+[EL Fine]: sql: 2017-12-11 10:24:57.95--ServerSession(1709930189)--Connection(1089691218)--CREATE TABLE METALICO (ID BIGINT NOT NULL, PRIMARY KEY (ID))
+[EL Fine]: sql: 2017-12-11 10:24:57.951--ServerSession(1709930189)--Connection(1089691218)--CREATE TABLE TARJETACREDITO (ID BIGINT NOT NULL, NUMERO VARCHAR(255), TIPO VARCHAR(255), VALIDEZ TIMESTAMP, PRIMARY KEY (ID))
+[EL Fine]: sql: 2017-12-11 10:24:57.952--ServerSession(1709930189)--Connection(1089691218)--CREATE TABLE MECANICO (ID BIGINT GENERATED BY DEFAULT AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL, APELLIDOS VARCHAR(255), DNI VARCHAR(255), NOMBRE VARCHAR(255), PRIMARY KEY (ID))
+[EL Fine]: sql: 2017-12-11 10:24:57.953--ServerSession(1709930189)--Connection(1089691218)--CREATE TABLE TIPOVEHICULO (ID BIGINT GENERATED BY DEFAULT AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL, NOMBRE VARCHAR(255), PRECIOHORA REAL, PRIMARY KEY (ID))
+[EL Fine]: sql: 2017-12-11 10:24:57.954--ServerSession(1709930189)--Connection(1089691218)--CREATE TABLE INTERVENCION (ID BIGINT GENERATED BY DEFAULT AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL, MINUTOS INTEGER, AVERIA_ID BIGINT, MECANICO_ID BIGINT, PRIMARY KEY (ID))
+[EL Fine]: sql: 2017-12-11 10:24:57.955--ServerSession(1709930189)--Connection(1089691218)--CREATE TABLE VEHICULO (ID BIGINT GENERATED BY DEFAULT AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL, MARCA VARCHAR(255), MATRICULA VARCHAR(255), MODELO VARCHAR(255), NUMAVERIAS INTEGER, CLIENTE_ID BIGINT, TIPOVEHICULO_ID BIGINT, PRIMARY KEY (ID))
+[EL Fine]: sql: 2017-12-11 10:24:57.956--ServerSession(1709930189)--Connection(1089691218)--CREATE TABLE BONO (ID BIGINT NOT NULL, CODIGO VARCHAR(255), DESCRIPCION VARCHAR(255), DISPONIBLE REAL, PRIMARY KEY (ID))
+[EL Fine]: sql: 2017-12-11 10:24:57.957--ServerSession(1709930189)--Connection(1089691218)--CREATE TABLE AVERIA (ID BIGINT GENERATED BY DEFAULT AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL, DESCRIPCION VARCHAR(255), FECHA TIMESTAMP, IMPORTE REAL, STATUS INTEGER, FACTURA_ID BIGINT, MECANICO_ID BIGINT, VEHICULO_ID BIGINT, PRIMARY KEY (ID))
+[EL Fine]: sql: 2017-12-11 10:24:57.959--ServerSession(1709930189)--Connection(1089691218)--CREATE TABLE FACTURA (ID BIGINT GENERATED BY DEFAULT AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL, FACTURASTATUS INTEGER, FECHA TIMESTAMP, IMPORTE REAL, NUMERO BIGINT, PRIMARY KEY (ID))
+[EL Fine]: sql: 2017-12-11 10:24:57.96--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE CLIENTE ADD CONSTRAINT UNQ_CLIENTE_2 UNIQUE (DNI)
+[EL Fine]: sql: 2017-12-11 10:24:57.961--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE SUSTITUCION ADD CONSTRAINT UNQ_SUSTITUCION_0 UNIQUE (REPUESTO_ID, INTERVENCION_ID)
+[EL Fine]: sql: 2017-12-11 10:24:57.962--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE TARJETACREDITO ADD CONSTRAINT UNQ_TARJETACREDITO_1 UNIQUE (NUMERO)
+[EL Fine]: sql: 2017-12-11 10:24:57.963--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE TIPOVEHICULO ADD CONSTRAINT UNQ_TIPOVEHICULO_1 UNIQUE (NOMBRE)
+[EL Fine]: sql: 2017-12-11 10:24:57.964--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE INTERVENCION ADD CONSTRAINT UNQ_INTERVENCION_0 UNIQUE (AVERIA_ID, MECANICO_ID)
+[EL Fine]: sql: 2017-12-11 10:24:57.965--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE VEHICULO ADD CONSTRAINT UNQ_VEHICULO_2 UNIQUE (MATRICULA)
+[EL Fine]: sql: 2017-12-11 10:24:57.967--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE BONO ADD CONSTRAINT UNQ_BONO_1 UNIQUE (CODIGO)
+[EL Fine]: sql: 2017-12-11 10:24:57.968--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE AVERIA ADD CONSTRAINT UNQ_AVERIA_0 UNIQUE (VEHICULO_ID, FECHA)
+[EL Fine]: sql: 2017-12-11 10:24:57.97--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE CARGO ADD CONSTRAINT FK_CARGO_FACTURA_ID FOREIGN KEY (FACTURA_ID) REFERENCES FACTURA (ID)
+[EL Fine]: sql: 2017-12-11 10:24:57.971--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE CARGO ADD CONSTRAINT FK_CARGO_MEDIOPAGO_ID FOREIGN KEY (MEDIOPAGO_ID) REFERENCES MEDIOPAGO (ID)
+[EL Fine]: sql: 2017-12-11 10:24:57.972--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE SUSTITUCION ADD CONSTRAINT FK_SUSTITUCION_INTERVENCION_ID FOREIGN KEY (INTERVENCION_ID) REFERENCES INTERVENCION (ID)
+[EL Fine]: sql: 2017-12-11 10:24:57.973--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE SUSTITUCION ADD CONSTRAINT FK_SUSTITUCION_REPUESTO_ID FOREIGN KEY (REPUESTO_ID) REFERENCES REPUESTO (ID)
+[EL Fine]: sql: 2017-12-11 10:24:57.974--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE MEDIOPAGO ADD CONSTRAINT FK_MEDIOPAGO_CLIENTE_ID FOREIGN KEY (CLIENTE_ID) REFERENCES CLIENTE (ID)
+[EL Fine]: sql: 2017-12-11 10:24:57.976--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE METALICO ADD CONSTRAINT FK_METALICO_ID FOREIGN KEY (ID) REFERENCES MEDIOPAGO (ID)
+[EL Fine]: sql: 2017-12-11 10:24:57.977--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE TARJETACREDITO ADD CONSTRAINT FK_TARJETACREDITO_ID FOREIGN KEY (ID) REFERENCES MEDIOPAGO (ID)
+[EL Fine]: sql: 2017-12-11 10:24:57.978--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE INTERVENCION ADD CONSTRAINT FK_INTERVENCION_MECANICO_ID FOREIGN KEY (MECANICO_ID) REFERENCES MECANICO (ID)
+[EL Fine]: sql: 2017-12-11 10:24:57.979--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE INTERVENCION ADD CONSTRAINT FK_INTERVENCION_AVERIA_ID FOREIGN KEY (AVERIA_ID) REFERENCES AVERIA (ID)
+[EL Fine]: sql: 2017-12-11 10:24:57.98--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE VEHICULO ADD CONSTRAINT FK_VEHICULO_TIPOVEHICULO_ID FOREIGN KEY (TIPOVEHICULO_ID) REFERENCES TIPOVEHICULO (ID)
+[EL Fine]: sql: 2017-12-11 10:24:57.981--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE VEHICULO ADD CONSTRAINT FK_VEHICULO_CLIENTE_ID FOREIGN KEY (CLIENTE_ID) REFERENCES CLIENTE (ID)
+[EL Fine]: sql: 2017-12-11 10:24:57.983--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE BONO ADD CONSTRAINT FK_BONO_ID FOREIGN KEY (ID) REFERENCES MEDIOPAGO (ID)
+[EL Fine]: sql: 2017-12-11 10:24:57.983--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE AVERIA ADD CONSTRAINT FK_AVERIA_MECANICO_ID FOREIGN KEY (MECANICO_ID) REFERENCES MECANICO (ID)
+[EL Fine]: sql: 2017-12-11 10:24:57.984--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE AVERIA ADD CONSTRAINT FK_AVERIA_VEHICULO_ID FOREIGN KEY (VEHICULO_ID) REFERENCES VEHICULO (ID)
+[EL Fine]: sql: 2017-12-11 10:24:57.985--ServerSession(1709930189)--Connection(1089691218)--ALTER TABLE AVERIA ADD CONSTRAINT FK_AVERIA_FACTURA_ID FOREIGN KEY (FACTURA_ID) REFERENCES FACTURA (ID)
+[EL Fine]: sql: 2017-12-11 10:24:58.174--ServerSession(1709930189)--Connection(1089691218)--SELECT ID, APELLIDOS, DNI, NOMBRE FROM MECANICO

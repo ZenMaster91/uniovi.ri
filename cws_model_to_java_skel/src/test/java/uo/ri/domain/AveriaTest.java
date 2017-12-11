@@ -3,10 +3,8 @@ package uo.ri.domain;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
-import org.junit.Before;
-import org.junit.Test;
 
 import uo.ri.model.Association;
 import uo.ri.model.Averia;
@@ -18,8 +16,12 @@ import uo.ri.model.Repuesto;
 import uo.ri.model.Sustitucion;
 import uo.ri.model.TipoVehiculo;
 import uo.ri.model.Vehiculo;
-import uo.ri.model.exception.BusinessException;
 import uo.ri.model.types.FacturaStatus;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import uo.ri.util.exception.BusinessException;
 
 public class AveriaTest {
 
@@ -37,7 +39,7 @@ public class AveriaTest {
 		vehiculo = new Vehiculo( "1234 GJI", "ibiza", "seat" );
 		Association.Poseer.link( cliente, vehiculo );
 
-		tipoVehiculo = new TipoVehiculo( "coche", 50.0 /* €/hora */ );
+		tipoVehiculo = new TipoVehiculo( "coche", 50.0 /* â‚¬/hora */ );
 		Association.Clasificar.link( tipoVehiculo, vehiculo );
 
 		averia = new Averia( vehiculo, "falla la junta la trocla" );
@@ -47,7 +49,7 @@ public class AveriaTest {
 		intervencion = new Intervencion( mecanico, averia );
 		intervencion.setMinutos( 60 );
 
-		repuesto = new Repuesto( "R1001", "junta la trocla", 100.0 /* € */ );
+		repuesto = new Repuesto( "R1001", "junta la trocla", 100.0 /* â‚¬ */ );
 		sustitucion = new Sustitucion( repuesto, intervencion );
 		sustitucion.setCantidad( 2 );
 
@@ -103,10 +105,14 @@ public class AveriaTest {
 	@Test(expected = BusinessException.class) public void testAveriaNoTerminadaException()
 			throws BusinessException {
 		averia.reopen();
-		List<Averia> averias = new ArrayList<Averia>();
+		List<Averia> averias = new ArrayList<>();
 		averias.add( averia );
-		new Factura( 0L, averias ); // debe saltar excepcion: averia no
-									// terminada
+		try {
+			new Factura( 0L, averias );
+		} catch (uo.ri.model.exception.BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} // debe saltar excepcion: averia no terminada
 	}
 
 	/**
@@ -115,11 +121,39 @@ public class AveriaTest {
 	 * @throws BusinessException
 	 */
 	@Test public void testFacturaCreadaSinAbonar() throws BusinessException {
-		List<Averia> averias = new ArrayList<Averia>();
+		List<Averia> averias = new ArrayList<>();
 		averias.add( averia );
-		Factura factura = new Factura( 0L, averias );
+		Factura factura = null;
+		try {
+			factura = new Factura( 0L, averias );
+		} catch (uo.ri.model.exception.BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		assertTrue( factura.getStatus() == FacturaStatus.SIN_ABONAR );
+	}
+
+	/**
+	 * Una averia no puede ser marcada como facturada si no tiene factura
+	 * asignada
+	 * 
+	 * @throws BusinessException
+	 */
+	@Test(expected = BusinessException.class) public void testSinFacturaNoMarcarFacturada()
+			throws BusinessException {
+		averia.markAsInvoiced(); // Lanza excepción "No factura asignada"
+	}
+
+	/**
+	 * La fecha de averia se devuelve clonada
+	 */
+	@SuppressWarnings("deprecation") @Test public void testSafeGetFechaClonada() {
+		Date d = averia.getFecha();
+
+		d.setYear( 0 );
+
+		assertTrue( averia.getFecha().getYear() == new Date().getYear() );
 	}
 
 }

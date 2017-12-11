@@ -18,7 +18,7 @@ import uo.ri.model.Repuesto;
 import uo.ri.model.Sustitucion;
 import uo.ri.model.TipoVehiculo;
 import uo.ri.model.Vehiculo;
-import uo.ri.model.exception.BusinessException;
+import uo.ri.util.exception.BusinessException;
 
 public class PagarTest {
 	private Mecanico mecanico;
@@ -58,7 +58,12 @@ public class PagarTest {
 		factura.addAveria( averia );
 
 		metalico = new Metalico( cliente );
-		cargo = new Cargo( factura, metalico, 100.0 );
+		try {
+			cargo = new Cargo( factura, metalico, 100.0 );
+		} catch (uo.ri.model.exception.BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Test public void testPagarAdd() throws BusinessException {
@@ -85,7 +90,12 @@ public class PagarTest {
 	}
 
 	@Test public void testCargarRemove() throws BusinessException {
-		cargo.rewind();
+		try {
+			cargo.rewind();
+		} catch (uo.ri.model.exception.BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		assertTrue( !metalico.getCargos().contains( cargo ) );
 		assertTrue( metalico.getCargos().size() == 0 );

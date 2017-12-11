@@ -116,8 +116,8 @@ import uo.ri.model.types.FacturaStatus;
 	/**
 	 * @return the date of the invoice.
 	 */
-	public Calendar getFecha() {
-		return fecha;
+	public Date getFecha() {
+		return new Date( fecha.getTimeInMillis() );
 	}
 
 	/**

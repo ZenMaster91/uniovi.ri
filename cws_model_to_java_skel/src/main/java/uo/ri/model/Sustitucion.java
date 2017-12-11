@@ -15,7 +15,7 @@ import javax.persistence.UniqueConstraint;
 	@ManyToOne private Repuesto repuesto;
 	@ManyToOne private Intervencion intervencion;
 	private int cantidad;
-	
+
 	/**
 	 * Allocates a substitution object and initializes it.
 	 */

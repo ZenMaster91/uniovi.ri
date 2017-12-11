@@ -19,6 +19,14 @@
 				and a.status = uo.ri.model.types.AveriaStatus.TERMINADA 
 		</query>
 	</named-query>
+	
+	<named-query name="Mecanico.findByDni">
+	<query>
+		SELECT m 
+		FROM Mecanico m 
+		WHERE m.dni = ?1
+	</query>
+	</named-query>
 -->	
 
 <!-- 
